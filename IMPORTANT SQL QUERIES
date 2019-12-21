@@ -1,0 +1,108 @@
+IMPORTANT SQL QUERIES
+
+SHOWING INFO FOR HUMANS
+
+SELECT Player.id,
+       Player.Name,
+       Player.Health,
+       Player.Attack,
+	   Player.Defense,
+       Goal.Objective,
+       Weapon.Name AS Weapon,
+       Shield.Name AS Shield,
+       Kingdom.Name AS Kingdom,
+       Tribe.Name AS Tribe
+  FROM Player
+       LEFT JOIN
+       Knight ON Knight.id = Player.id
+       LEFT JOIN
+       Viking ON Viking.id = Player.id
+       LEFT JOIN
+       Goal ON Player.id = Goal.id
+       LEFT JOIN
+       Shield ON Player.Shield = Shield.id
+       LEFT JOIN
+       Weapon ON Player.Weapon = Weapon.Id
+       LEFT JOIN
+       Kingdom ON Kingdom.id = Knight.Kingdom
+       LEFT JOIN
+       Tribe ON Tribe.id = Viking.Tribe;
+;
+
+
+SHOWING INFO FOR CREATURES
+
+SELECT Creature.id,
+       Creature.Name,
+       Creature.Health,
+       Creature.Behavior,
+       Creature.Attack,
+       Creature.Defense,
+       Creature.Size,
+       Creature.Habitat,
+       Dragon.Color AS [Dragon Color],
+       Dragon.Species AS [Dragon Species],
+       Dragon.Wingspan AS Wingspan,
+       Skeleton.Weapon AS Weapon,
+       Troll.Color AS [Troll Color],
+       Troll.Species AS [Troll Species],
+       Wolf.Color AS [Wolf Color],
+       Wolf.Species AS [Wolf Species]
+  FROM Creature
+       LEFT JOIN
+       Dragon ON Dragon.id = Creature.id
+       LEFT JOIN
+       Skeleton ON Skeleton.id = Creature.id
+       LEFT JOIN
+       Troll ON Troll.id = Creature.id
+       LEFT JOIN
+       Wolf ON Wolf.id = Creature.id;
+;
+
+
+ARENA INFO FOR PLAYER
+
+SELECT Player.Name,
+       Player.Attack,
+       Player.Defense,
+       Player.Health,
+       Weapon.Name AS Weapon,
+       Shield.Name AS Shield
+  FROM Player
+       INNER JOIN
+       Weapon ON Weapon.id = Player.Weapon
+       INNER JOIN
+       Shield ON Shield.Id = Player.Shield
+ WHERE Player.id = ?;
+
+ARENA INFO FOR ENEMY
+
+SELECT Creature.Name,
+       Creature.Attack,
+       Creature.Defense,
+       Creature.Health
+  FROM Creature
+ WHERE Creature.id = ?;
+
+ARENA UPDATE FOR ENEMY
+
+UPDATE Creature SET Health = Health-? WHERE Id = ?;
+
+ADD Viking 
+
+INSERT INTO Player(id,Name, Health, Attack, Defense, Weapon, Shield, Goal) VALUES (?,?,?,?,?,?,?,?);
+INSERT INTO Viking(id, Tribe) VALUES (?,?);
+
+ADD Knight
+
+INSERT INTO Player(id,Name, Health, Attack, Defense, Weapon, Shield, Goal) VALUES (?,?,?,?,?,?,?,?);
+INSERT INTO Knight(id, Kingdom) VALUES (?,?);
+
+HEAL UPDATE FOR Creature
+
+UPDATE Creature SET Health = ? WHERE Id = ?;
+
+HEAL UPDATE FOR Player
+
+UPDATE Player SET Health = ? WHERE Id = ?;
+

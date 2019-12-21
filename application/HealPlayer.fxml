@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.HealPlayerController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <ImageView fx:id="image" fitHeight="720.0" fitWidth="1280.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" />
+    <Button layoutX="167.0" layoutY="294.0" mnemonicParsing="false" onAction="#goToHealCreature" prefHeight="133.0" prefWidth="374.0" text="CREATURE">
+      <font>
+        <Font size="40.0" fx:id="x1" />
+      </font>
+    </Button>
+    <Button font="$x1" layoutX="743.0" layoutY="294.0" mnemonicParsing="false" onAction="#goToHealPlayer" prefHeight="133.0" prefWidth="374.0" text="PLAYER" />
+    <Button layoutX="40.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="34.0" prefWidth="141.0" text="Go Back" />
+  </children>
+</AnchorPane>

@@ -1,0 +1,74 @@
+package application; 
+
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.fxml.FXMLLoader;
+import java.io.*;
+
+public class Main extends Application {
+    private MediaView view;
+    private MediaPlayer mediaPlayer;
+
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+
+            NestriaDB db = new NestriaDB();
+
+            if (!db.isOpen()) {
+                System.out.printf("Could not connect to database.%n");
+                System.exit(1);
+            }
+
+            db.close();
+            StackPane root = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
+
+            Scene scene = new Scene(root,400,400);
+            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+            File file = new File("application\\NestriaTitleScreen.mp4");   
+            String media = file.toURI().toString();
+            Media musicFile = new Media(media);
+            mediaPlayer = new MediaPlayer(musicFile);
+            mediaPlayer.setAutoPlay(true);
+            view = new MediaView(mediaPlayer);
+            mediaPlayer.onRepeatProperty();
+            view.setPreserveRatio(true);
+            view.autosize();
+            mediaPlayer.setOnEndOfMedia(new Runnable() {
+                    public void run() {
+                        mediaPlayer.seek(Duration.ZERO);
+                    }
+                });
+            root.getChildren().add(0, view);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Nestria");
+            primaryStage.setMaxHeight(720);
+            primaryStage.setMaxWidth(1280);
+            primaryStage.setMinHeight(720);
+            primaryStage.setMinWidth(1280);
+            primaryStage.show();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
+
+    public MediaView getViewPlayer() {
+        return view;
+    }
+}
+

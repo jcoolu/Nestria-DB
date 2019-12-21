@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.ViewInfoController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <ImageView fx:id="image" fitHeight="720.0" fitWidth="1280.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff1cc" height="285.0" layoutX="198.0" layoutY="50.0" opacity="0.78" stroke="WHITE" strokeType="INSIDE" width="909.0" />
+    <Text layoutX="607.0" layoutY="87.0" scaleX="5.476802284082798" scaleY="3.506118453255017" strokeType="OUTSIDE" strokeWidth="0.0" text="View Information" />
+    <Button layoutX="61.0" layoutY="35.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="30.0" prefWidth="145.0" text="Go Back" />
+    <Button layoutX="538.0" layoutY="166.0" mnemonicParsing="false" onAction="#goToViewCreature" prefHeight="48.94921875" prefWidth="228.0" text="View Creatures">
+      <font>
+        <Font size="20.0" fx:id="x1" />
+      </font>
+    </Button>
+    <Button font="$x1" layoutX="224.0" layoutY="166.0" mnemonicParsing="false" onAction="#goToViewPlayer" prefHeight="48.94921875" prefWidth="228.0" text="View Players" />
+    <Button font="$x1" layoutX="835.0" layoutY="166.0" mnemonicParsing="false" onAction="#goToViewWeapon" prefHeight="48.94921875" prefWidth="228.0" text="View Weapons" />
+    <Button font="$x1" layoutX="338.0" layoutY="269.0" mnemonicParsing="false" onAction="#goToViewShield" prefHeight="48.94921875" prefWidth="228.0" text="View Shields" />
+    <Button font="$x1" layoutX="702.0" layoutY="269.0" mnemonicParsing="false" onAction="#goToViewScenery" prefHeight="48.94921875" prefWidth="228.0" text="View Scenery" />
+  </children>
+</AnchorPane>

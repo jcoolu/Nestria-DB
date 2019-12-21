@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="image" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.MainMenuController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <ImageView fx:id="background" fitHeight="754.875" fitWidth="1342.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" />
+    <Button layoutX="543.0" layoutY="115.0" mnemonicParsing="false" onAction="#goToArena" prefHeight="46.0" prefWidth="194.0" text="Enter Arena" textFill="RED">
+      <effect>
+        <DropShadow color="RED" height="24.285714285714285" radius="38.64880952380952" width="132.3095238095238" />
+      </effect>
+      <font>
+        <Font size="20.0" fx:id="x1" />
+      </font>
+    </Button>
+    <Button font="$x1" layoutX="543.0" layoutY="198.0" mnemonicParsing="false" onAction="#goToAddPlayer" prefHeight="46.0" prefWidth="194.0" text="Add Player" textFill="$x2">
+      <effect>
+        <DropShadow height="24.285714285714285" radius="37.128928571428574" width="126.23">
+          <color>
+            <Color blue="0.000" green="0.480" red="1.000" fx:id="x2" />
+          </color>
+        </DropShadow>
+      </effect>
+    </Button>
+    <Button font="$x1" layoutX="543.0" layoutY="279.0" mnemonicParsing="false" onAction="#goToHealPlayer" prefHeight="46.0" prefWidth="194.0" text="Heal Player" textFill="#fff500">
+      <effect>
+        <DropShadow color="#fff733" height="24.285714285714285" radius="37.128928571428574" width="126.23" />
+      </effect>
+    </Button>
+    <Button font="$x1" layoutX="543.0" layoutY="369.0" mnemonicParsing="false" onAction="#goToViewInfo" prefHeight="46.0" prefWidth="194.0" text="View Info" textFill="$x5">
+      <effect>
+        <DropShadow height="24.285714285714285" radius="37.128928571428574" width="126.23">
+          <color>
+            <Color blue="1.000" green="0.160" red="0.000" fx:id="x5" />
+          </color>
+        </DropShadow>
+      </effect>
+    </Button>
+    <Button font="$x1" layoutX="543.0" layoutY="454.0" mnemonicParsing="false" onAction="#goToHowToPlay" prefHeight="46.0" prefWidth="194.0" text="How To Play" textFill="#8f00ff">
+      <effect>
+        <DropShadow color="#a533ff" height="24.285714285714285" radius="37.128928571428574" width="126.23" />
+      </effect>
+    </Button>
+    <Button font="$x1" layoutX="543.0" layoutY="544.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="46.0" prefWidth="194.0" text="Quit Game" textFill="#ff66f9">
+      <effect>
+        <DropShadow color="#ff33c6" height="24.285714285714285" radius="37.128928571428574" width="126.23" />
+      </effect>
+    </Button>
+  </children>
+</AnchorPane>

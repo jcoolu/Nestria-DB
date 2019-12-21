@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="720.0" maxWidth="1280.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.ArenaController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <ImageView id="Background" fx:id="BackgroundPic" fitHeight="720.0" fitWidth="1280.0" layoutX="0.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff1cc" height="190.0" layoutX="392.0" layoutY="12.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="316.0" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff1cc" height="285.0" layoutX="299.0" layoutY="373.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="307.0" />
+    <Button fx:id="DefendButton" layoutX="990.0" layoutY="479.0" mnemonicParsing="false" onAction="#defend" prefHeight="57.0" prefWidth="200.0" text="DEFEND">
+      <font>
+        <Font size="30.0" fx:id="x1" />
+      </font>
+    </Button>
+    <Button fx:id="RunButton" font="$x1" layoutX="831.0" layoutY="580.0" mnemonicParsing="false" onAction="#goBack" prefHeight="57.0" prefWidth="265.0" text="RUN" />
+    <ImageView id="PlayerPicture" fx:id="PlayerPic" fitHeight="337.5" fitWidth="270.0" layoutX="29.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true" />
+    <Button fx:id="AttackButton" font="$x1" layoutX="740.0" layoutY="479.0" mnemonicParsing="false" onAction="#attack" prefHeight="57.0" prefWidth="200.0" text="ATTACK" />
+    <TextField fx:id="PlayerName" editable="false" layoutX="398.0" layoutY="390.0" onAction="#setUp" onInputMethodTextChanged="#setUp" prefWidth="200.0" text="" />
+    <TextField fx:id="PlayerHealth" editable="false" layoutX="398.0" layoutY="536.0" prefWidth="200.0" text="" />
+    <TextField fx:id="PlayerAttack" editable="false" layoutX="398.0" layoutY="446.0" onAction="#setUp" prefWidth="200.0" text="" />
+    <ImageView id="PlayerPicture" fx:id="CreaturePic" fitHeight="337.5" fitWidth="270.0" layoutX="961.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+    <Text layoutX="338.0" layoutY="324.0" scaleX="2.9273373212245124" scaleY="2.5061185056646753" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" />
+    <Text layoutX="842.0" layoutY="273.0" scaleX="2.9273373212245124" scaleY="2.5061185056646753" strokeType="OUTSIDE" strokeWidth="0.0" text="ENEMY" />
+    <Text layoutX="322.0" layoutY="406.0" scaleX="1.7520504762137319" scaleY="1.3591563318667568" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+    <Text layoutX="322.0" layoutY="462.0" scaleX="1.7520504762137319" scaleY="1.3591563318667568" strokeType="OUTSIDE" strokeWidth="0.0" text="Attack:" />
+    <Text layoutX="323.0" layoutY="502.0" scaleX="1.7520504762137319" scaleY="1.3591563318667568" strokeType="OUTSIDE" strokeWidth="0.0" text="Defense:" />
+    <Text layoutX="323.0" layoutY="552.0" scaleX="1.7520504762137319" scaleY="1.3591563318667568" strokeType="OUTSIDE" strokeWidth="0.0" text="Health:" />
+    <TextField fx:id="PlayerDefense" editable="false" layoutX="398.0" layoutY="486.0" prefWidth="200.0" text="" />
+    <Text layoutX="323.0" layoutY="603.0" scaleX="1.7520504762137319" scaleY="1.3591563318667568" strokeType="OUTSIDE" strokeWidth="0.0" text="Weapon:" />
+    <Text layoutX="327.0" layoutY="642.0" scaleX="1.7520504762137319" scaleY="1.3591563318667568" strokeType="OUTSIDE" strokeWidth="0.0" text="Shield:" />
+    <TextField fx:id="PlayerWeapon" editable="false" layoutX="398.0" layoutY="587.0" prefWidth="200.0" text="" />
+    <TextField fx:id="PlayerShield" editable="false" layoutX="398.0" layoutY="626.0" prefWidth="200.0" text="" />
+    <TextField fx:id="CreatureName" editable="false" layoutX="499.0" layoutY="30.0" prefWidth="200.0" text="" />
+    <TextField fx:id="CreatureHealth" editable="false" layoutX="499.0" layoutY="154.0" prefWidth="200.0" text="" />
+    <TextField fx:id="CreatureAttack" editable="false" layoutX="499.0" layoutY="69.0" prefWidth="200.0" text="" />
+    <Text layoutX="410.0" layoutY="46.0" scaleX="1.7520504762137319" scaleY="1.3591563318667568" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+    <Text layoutX="411.0" layoutY="85.0" scaleX="1.7520504762137319" scaleY="1.3591563318667568" strokeType="OUTSIDE" strokeWidth="0.0" text="Attack:" />
+    <Text layoutX="414.0" layoutY="128.0" scaleX="1.7520504762137319" scaleY="1.3591563318667568" strokeType="OUTSIDE" strokeWidth="0.0" text="Defense:" />
+    <Text layoutX="411.0" layoutY="170.0" scaleX="1.7520504762137319" scaleY="1.3591563318667568" strokeType="OUTSIDE" strokeWidth="0.0" text="Health:" />
+    <TextField fx:id="CreatureDefense" editable="false" layoutX="499.0" layoutY="112.0" prefWidth="200.0" text="" />
+  </children>
+</AnchorPane>

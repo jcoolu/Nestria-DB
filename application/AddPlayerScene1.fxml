@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.AddPlayerScene1Controller">
+  <!-- TODO Add Nodes -->
+  <children>
+    <ImageView id="Background" fx:id="image" fitHeight="720.0" fitWidth="1280.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" />
+    <Button fx:id="AddKnightButton" layoutX="113.0" layoutY="289.0" mnemonicParsing="false" onAction="#goToAddKnight" prefHeight="143.0" prefWidth="473.0" text="Add Knight">
+      <effect>
+        <DropShadow color="#00ff29" height="174.2063492063492" radius="86.6031746031746" width="174.2063492063492" />
+      </effect>
+      <font>
+        <Font size="50.0" fx:id="x1" />
+      </font>
+    </Button>
+    <Button fx:id="AddVikingButton" font="$x1" layoutX="696.0" layoutY="289.0" mnemonicParsing="false" onAction="#goToAddViking" prefHeight="143.0" prefWidth="473.0" text="Add Viking">
+      <effect>
+        <DropShadow color="#3385ff" height="174.2063492063492" radius="86.6031746031746" width="174.2063492063492" />
+      </effect>
+    </Button>
+    <Button layoutX="45.0" layoutY="35.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="30.0" prefWidth="137.0" text="Go Back" />
+  </children>
+</AnchorPane>

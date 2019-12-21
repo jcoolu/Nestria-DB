@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.ViewSceneryController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dcffcc" height="720.0" layoutX="0.0" layoutY="0.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
+    <Text layoutX="607.0" layoutY="87.0" scaleX="5.476802284082798" scaleY="3.506118453255017" strokeType="OUTSIDE" strokeWidth="0.0" text="View Scenery" />
+    <Button layoutX="61.0" layoutY="35.0" mnemonicParsing="false" onAction="#goToViewInfo" prefHeight="30.0" prefWidth="145.0" text="Go Back" />
+    <TableView fx:id="scenery" layoutX="105.0" layoutY="164.0" prefHeight="483.0" prefWidth="1046.0">
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="65.0" text="Id" fx:id="idColumn" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="242.0" text="Region" fx:id="nameColumn" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="308.0" text="Effect" fx:id="effectColumn" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="685.0" text="Background" fx:id="imageColumn" />
+      </columns>
+    </TableView>
+  </children>
+</AnchorPane>

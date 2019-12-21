@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.AddKnightController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0083cc" height="736.0" layoutX="0.0" layoutY="1.0" opacity="1.0" stroke="WHITE" strokeType="INSIDE" width="1280.0" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="303.0" layoutX="43.0" layoutY="91.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="918.0" />
+    <Button id="AddKnightButton" layoutX="908.0" layoutY="612.0" mnemonicParsing="false" onAction="#addKnight" prefHeight="58.0" prefWidth="256.0" text="Add Knight">
+      <font>
+        <Font size="20.0" />
+      </font>
+    </Button>
+    <Text layoutX="53.0" layoutY="122.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="ID: " />
+    <Button fx:id="GoBack" layoutX="28.0" layoutY="29.0" mnemonicParsing="false" onAction="#goToAddScene" prefHeight="29.0" prefWidth="124.0" text="Go Back" />
+    <Text layoutX="58.0" layoutY="180.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+    <Text layoutX="56.0" layoutY="242.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Attack:" />
+    <Text layoutX="60.0" layoutY="301.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Defense:" />
+    <Text layoutX="59.0" layoutY="369.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Health:" />
+    <Text layoutX="620.0" layoutY="127.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Weapon:" />
+    <Text layoutX="620.0" layoutY="180.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Shield:" />
+    <Text layoutX="620.0" layoutY="242.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Kingdom:" />
+    <TextField id="Id" fx:id="KnightId" layoutX="133.0" layoutY="103.0" prefHeight="29.0" prefWidth="388.0" />
+    <TextField id="Name" fx:id="KnightName" layoutX="133.0" layoutY="154.0" prefHeight="29.0" prefWidth="388.0" />
+    <TextField id="Attack" fx:id="KnightAttack" layoutX="133.0" layoutY="222.0" prefHeight="29.0" prefWidth="388.0" />
+    <TextField id="Defense" fx:id="KnightDefense" layoutX="133.0" layoutY="281.0" prefHeight="29.0" prefWidth="388.0" />
+    <TextField id="Health" fx:id="KnightHealth" layoutX="133.0" layoutY="346.0" prefHeight="29.0" prefWidth="388.0" />
+    <ComboBox id="Weapon" fx:id="KnightWeapon" layoutX="726.0" layoutY="109.0" prefHeight="27.07342529296875" prefWidth="196.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <ComboBox id="Shield" fx:id="KnightShield" layoutX="726.0" layoutY="161.0" prefHeight="27.07342529296875" prefWidth="196.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <ComboBox id="Kingdom" fx:id="KnightKingdom" layoutX="726.0" layoutY="223.0" prefHeight="27.07342529296875" prefWidth="196.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <TextField id="StatusText" fx:id="statusText" editable="false" layoutX="73.0" layoutY="552.0" prefHeight="97.0" prefWidth="356.0" text="" />
+    <ImageView fx:id="Status" fitHeight="200.0" fitWidth="200.0" layoutX="490.0" layoutY="449.0" pickOnBounds="true" preserveRatio="true" />
+    <ComboBox id="Kingdom" fx:id="Goal" layoutX="726.0" layoutY="281.0" prefHeight="27.07342529296875" prefWidth="196.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Text layoutX="647.0" layoutY="296.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Goal:" />
+  </children>
+</AnchorPane>
