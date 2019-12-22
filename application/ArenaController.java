@@ -78,6 +78,8 @@ public class ArenaController implements Initializable{
         Random rand = new Random();
         creatureId = rand.nextInt(creatures.size()); 
         playerId = rand.nextInt(players.size());
+        CreaturePic.setImage(db.getCreaturePic(creatures.get(creatureId).getId()));
+        PlayerPic.setImage(db.getPlayerPic(players.get(playerId).getId()));
         try{
             int backgroundNumber = rand.nextInt(10) + 21; //21 - 30
         
@@ -88,9 +90,6 @@ public class ArenaController implements Initializable{
             BackgroundPic.setFitHeight(720);
             BackgroundPic.setFitWidth(1280);
             BackgroundPic.setImage(backim);
-
-            CreaturePic.setImage(creatures.get(creatureId).getImage());
-            PlayerPic.setImage(players.get(playerId).getImage());
             setTextFields();
         }
         catch(Exception e) {
@@ -110,7 +109,7 @@ public class ArenaController implements Initializable{
         players.set(playerId, db.getPlayer(players.get(playerId).getId()));
         setTextFields();
     }
-
+    
     public void setTextFields() {
         PlayerName.setText(players.get(playerId).getName());
         PlayerAttack.setText(Integer.toString(players.get(playerId).getAttack()));

@@ -244,9 +244,9 @@ public class NestriaDB {
             catch (Exception err) {;}
             try {conn.rollback();}
             catch (Exception err) {;}
-            
+
             cr = getCreature(cr.getId());
-            
+
             try{
                 stmt.close();
                 rset.close();
@@ -423,7 +423,7 @@ public class NestriaDB {
                     BufferedImage b = ImageIO.read(bis);
                     image = SwingFXUtils.toFXImage(b,null);
 
-                    table.add(new Player(id, name, health, attack, defense, weapon, shield, goal, kingdom, tribe, image));
+                    table.add(new Player(id, name, health, attack, defense, weapon, shield, goal, kingdom, tribe, im = new ImageView(image)));
                     im.setFitHeight(200);
                     im.setFitWidth(150);
                     i++;
@@ -456,6 +456,7 @@ public class NestriaDB {
         int id, health, attack, defense;
         String name, sql, weapon, behavior, size, habitat, dragonColor, 
         dragonSpecies, wingspan, trollColor, trollSpecies, wolfColor, wolfSpecies;
+        ImageView im = null;
         Image image = null;
         byte[] array;
 
@@ -507,7 +508,9 @@ public class NestriaDB {
                     image = SwingFXUtils.toFXImage(b,null);
 
                     table.add(new Creature(id, name, health, behavior, attack, defense, size, habitat,
-                            dragonColor, dragonSpecies, wingspan, weapon, trollColor, trollSpecies, wolfColor, wolfSpecies, image)); 
+                            dragonColor, dragonSpecies, wingspan, weapon, trollColor, trollSpecies, wolfColor, wolfSpecies, im = new ImageView(image))); 
+                    im.setFitHeight(200);
+                    im.setFitWidth(150);
                     i++; 
                 }
             }
@@ -536,6 +539,7 @@ public class NestriaDB {
         ResultSet rset = null;
         int id, health, attack, defense;
         String name, sql, weapon, shield, goal, tribe, kingdom;
+        ImageView im = null;
         Image image = null;
         byte[] array;
 
@@ -564,11 +568,8 @@ public class NestriaDB {
                 kingdom = rset.getString(9);
                 tribe = rset.getString(10);
                 array = rset.getBytes(11);
-                ByteArrayInputStream bis = new ByteArrayInputStream(array);
-                BufferedImage b = ImageIO.read(bis);
-                image = SwingFXUtils.toFXImage(b,null);
 
-                table.add(new Player(id, name, health, attack, defense, weapon, shield, goal, kingdom, tribe, image));
+                table.add(new Player(id, name, health, attack, defense, weapon, shield, goal, kingdom, tribe, im));
             }
             conn.commit();
         }
@@ -597,6 +598,7 @@ public class NestriaDB {
         String name, sql, weapon, behavior, size, habitat, dragonColor, 
         dragonSpecies, wingspan, trollColor, trollSpecies, wolfColor, wolfSpecies;
         Image image = null;
+        ImageView im = new ImageView();
         byte[] array;
 
         if (!isopen) return null;
@@ -636,12 +638,9 @@ public class NestriaDB {
                 wolfSpecies = rset.getString(16);
 
                 array = rset.getBytes(17);
-                ByteArrayInputStream bis = new ByteArrayInputStream(array);
-                BufferedImage b = ImageIO.read(bis);
-                image = SwingFXUtils.toFXImage(b,null);
 
                 table.add(new Creature(id, name, health, behavior, attack, defense, size, habitat,
-                        dragonColor, dragonSpecies, wingspan, weapon, trollColor, trollSpecies, wolfColor, wolfSpecies, image)); 
+                        dragonColor, dragonSpecies, wingspan, weapon, trollColor, trollSpecies, wolfColor, wolfSpecies, im)); 
             }
             conn.commit();
         }
@@ -864,6 +863,7 @@ public class NestriaDB {
         ResultSet rset = null;
         int id, health, attack, defense;
         String name, sql, weapon, shield, goal, tribe, kingdom;
+        ImageView im = null;
         Image image = null;
         byte[] array;
 
@@ -897,7 +897,7 @@ public class NestriaDB {
                 BufferedImage b = ImageIO.read(bis);
                 image = SwingFXUtils.toFXImage(b,null);
 
-                pl = new Player(id, name, health, attack, defense, weapon, shield, goal, kingdom, tribe, image);
+                pl = new Player(id, name, health, attack, defense, weapon, shield, goal, kingdom, tribe, im = new ImageView(image));
             }
             conn.commit();
         }
@@ -924,6 +924,7 @@ public class NestriaDB {
         Creature cr = null;
         byte[] array;
         Image image = null;
+        ImageView im = null;
         int id, health, attack, defense;
         String name, sql, weapon, behavior, size, habitat, dragonColor, 
         dragonSpecies, wingspan, trollColor, trollSpecies, wolfColor, wolfSpecies;
@@ -971,7 +972,7 @@ public class NestriaDB {
                 image = SwingFXUtils.toFXImage(b,null);
 
                 cr = new Creature(id, name, health, behavior, attack, defense, size, habitat,
-                    dragonColor, dragonSpecies, wingspan, weapon, trollColor, trollSpecies, wolfColor, wolfSpecies, image); 
+                    dragonColor, dragonSpecies, wingspan, weapon, trollColor, trollSpecies, wolfColor, wolfSpecies,im = new ImageView(image)); 
             }
             conn.commit();
         }
@@ -987,6 +988,89 @@ public class NestriaDB {
 
         }
         return cr;
+    }
+    
+    public Image getCreaturePic(int idm) {
+        
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+        Creature cr = null;
+        String sql;
+        byte[] array;
+        Image image = null;
+        if (!isopen) return null;
+
+        try {
+            sql = "SELECT Picture.ImageFile FROM CreaturePics INNER JOIN Picture ON CreaturePics.Picture " +
+            "= Picture.Id WHERE CreaturePics.Creature = ?;";
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1,idm);
+
+            rset = stmt.executeQuery();
+
+            while (rset.next()) {
+                array = rset.getBytes(1);
+                ByteArrayInputStream bis = new ByteArrayInputStream(array);
+                BufferedImage b = ImageIO.read(bis);
+                image = SwingFXUtils.toFXImage(b,null);
+
+
+            }
+            conn.commit();
+        }
+        catch (Exception e) {
+            System.out.print(e);
+            return null;
+        }
+        try{
+            stmt.close();
+            rset.close();
+        }
+        catch (Exception e) {
+
+        }
+        return image;
+    }
+    
+    public Image getPlayerPic(int idm) {
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+        Creature cr = null;
+        String sql;
+        byte[] array;
+        Image image = null;
+        if (!isopen) return null;
+
+        try {
+            sql = "SELECT Picture.ImageFile FROM PlayerPics INNER JOIN Picture ON PlayerPics.Picture " +
+            "= Picture.Id WHERE PlayerPics.Player = ?;";
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1,idm);
+
+            rset = stmt.executeQuery();
+
+            while (rset.next()) {
+                array = rset.getBytes(1);
+                ByteArrayInputStream bis = new ByteArrayInputStream(array);
+                BufferedImage b = ImageIO.read(bis);
+                image = SwingFXUtils.toFXImage(b,null);
+            }
+            conn.commit();
+        }
+        catch (Exception e) {
+            System.out.print(e);
+            return null;
+        }
+        try{
+            stmt.close();
+            rset.close();
+        }
+        catch (Exception e) {
+
+        }
+        return image;
     }
 }
 

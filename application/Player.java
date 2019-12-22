@@ -1,6 +1,6 @@
 package application;
 
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Write a description of class Player here.
@@ -21,12 +21,12 @@ public class Player
     private String goal;
     private String kingdom;
     private String tribe;
-    private Image image;
+    private ImageView image;
 
     /**
      * Constructor for objects of class Player
      */
-    public Player(int i, String n, int h, int a, int d, String w, String s, String g, String k, String t, Image im)
+    public Player(int i, String n, int h, int a, int d, String w, String s, String g, String k, String t, ImageView im)
     {
         id =i;
         name = n;
@@ -81,7 +81,7 @@ public class Player
         return tribe;
     }
 
-    public Image getImage() {
+    public ImageView getImage() {
         return image;
     }
 }
