@@ -43,6 +43,7 @@ public class MainMenuController implements Initializable {
             BufferedImage b = ImageIO.read(bis);
             Image image = SwingFXUtils.toFXImage(b,null);
             background.setImage(image);
+            db.close();
         }
         catch (Exception e){
             System.out.println(e);
@@ -52,7 +53,6 @@ public class MainMenuController implements Initializable {
     public void goToArena(ActionEvent event) throws IOException, SQLException {
         AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("Arena.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
-        NestriaDB db = new NestriaDB();
         Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();

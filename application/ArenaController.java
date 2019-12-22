@@ -49,13 +49,19 @@ public class ArenaController implements Initializable{
     private int creatureId;
     private int playerId;
     NestriaDB db = new NestriaDB();
+    private ArrayList<Creature> creatures;
+    private ArrayList<Player> players;
 
+    /** 
+     * Go back to Main Menu
+     */
     public void goBack(ActionEvent event) throws IOException {
         AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
+        db.close();
     }
 
     /**
@@ -67,13 +73,12 @@ public class ArenaController implements Initializable{
 
     @FXML
     public void setUp() {
-        db.setUp();
-        setTextFields();
-
-        playerId = db.getPlayerId()-1;
-        creatureId = db.getCreatureId()-1;
+        players = db.getPlayers();
+        creatures = db.getCreatures();
+        Random rand = new Random();
+        creatureId = rand.nextInt(creatures.size()); 
+        playerId = rand.nextInt(players.size());
         try{
-            Random rand = new Random();
             int backgroundNumber = rand.nextInt(10) + 21; //21 - 30
         
             byte[] array = db.getPicture(backgroundNumber);
@@ -84,45 +89,39 @@ public class ArenaController implements Initializable{
             BackgroundPic.setFitWidth(1280);
             BackgroundPic.setImage(backim);
 
-            int creatureNum = rand.nextInt(23) + 51; //51 - 74
-            array = db.getPicture(creatureNum);
-            bis = new ByteArrayInputStream(array);
-            b = ImageIO.read(bis);
-            Image creatureim = SwingFXUtils.toFXImage(b, null);
-            CreaturePic.setImage(creatureim);
-
-            int playerNum = rand.nextInt(20) + 31; // 31 - 50
-            array = db.getPicture(playerNum);
-            bis = new ByteArrayInputStream(array);
-            b = ImageIO.read(bis);
-            Image playerim = SwingFXUtils.toFXImage(b, null);
-            PlayerPic.setImage(playerim);
+            CreaturePic.setImage(creatures.get(creatureId).getImage());
+            PlayerPic.setImage(players.get(playerId).getImage());
+            setTextFields();
         }
         catch(Exception e) {
-
+            System.out.println(e);
         }
     }
 
     public void attack() {    
-        db.attack();
+        db.attack(creatures.get(creatureId), players.get(playerId));
+        creatures.set(creatureId, db.getCreature(creatures.get(creatureId).getId()));
+        players.set(playerId, db.getPlayer(players.get(playerId).getId()));
         setTextFields();
     }
 
     public void defend() {
-        db.defend();
+        db.defend(creatures.get(creatureId), players.get(playerId));
+        players.set(playerId, db.getPlayer(players.get(playerId).getId()));
         setTextFields();
     }
 
     public void setTextFields() {
-        PlayerName.setText(db.getplayername());
-        PlayerAttack.setText(db.getplayerattack());
-        PlayerHealth.setText(db.getplayerhealth());
-        PlayerDefense.setText(db.getplayerdefense());
-        PlayerWeapon.setText(db.getplayerweapon());
-        PlayerShield.setText(db.getplayershield());
-        CreatureName.setText(db.getcreaturename());
-        CreatureHealth.setText(db.getcreaturehealth());
-        CreatureAttack.setText(db.getcreatureattack());
-        CreatureDefense.setText(db.getcreaturedefense());
+        PlayerName.setText(players.get(playerId).getName());
+        PlayerAttack.setText(Integer.toString(players.get(playerId).getAttack()));
+        PlayerHealth.setText(Integer.toString(players.get(playerId).getHealth()));
+        PlayerDefense.setText(Integer.toString(players.get(playerId).getDefense()));
+        PlayerWeapon.setText(players.get(playerId).getWeapon());
+        PlayerShield.setText(players.get(playerId).getShield());
+        CreatureName.setText(creatures.get(creatureId).getName());
+        CreatureHealth.setText(Integer.toString(creatures.get(creatureId).getHealth()));
+        CreatureAttack.setText(Integer.toString(creatures.get(creatureId).getAttack()));
+        CreatureDefense.setText(Integer.toString(creatures.get(creatureId).getDefense()));
     }
+    
 }

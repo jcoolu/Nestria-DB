@@ -48,10 +48,10 @@ public class HealCreatureController implements Initializable{
     }
 
     public void heal() {
-        db.healCreature(EnterCreatureId, HealBy);
-        CreatureName.setText(db.getCreaturename());
-        CreatureId.setText(db.getCreatureid());
-        CreatureHealth.setText(db.getCreaturehealth());
+        Creature cr = db.healCreature(EnterCreatureId, HealBy);
+        CreatureName.setText(cr.getName());
+        CreatureId.setText(Integer.toString(cr.getId()));
+        CreatureHealth.setText(Integer.toString(cr.getHealth()));
     }
 
     public void goToHealScene(ActionEvent event) throws IOException, SQLException  {
@@ -60,26 +60,7 @@ public class HealCreatureController implements Initializable{
         Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
-    }
-
-    public TextField returnEnterCreatureId() {
-        return EnterCreatureId;
-    }
-
-    public TextField returnHealBy() {
-        return HealBy;
-    }
-
-    public TextField returnCreatureName() {
-        return CreatureName;
-    }
-
-    public TextField returnCreatureId() {
-        return CreatureId;
-    }
-
-    public TextField returnCreatureHealth() {
-        return CreatureHealth;
+        db.close();
     }
 
     public void goToMainMenu(ActionEvent event) throws IOException, SQLException {
@@ -88,5 +69,6 @@ public class HealCreatureController implements Initializable{
         Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
+        db.close();
     }
 }

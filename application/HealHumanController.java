@@ -48,10 +48,10 @@ public class HealHumanController implements Initializable{
     }
 
     public void heal() {
-        db.healPlayer(EnterPlayerId, HealBy, PlayerName, PlayerId, PlayerHealth);
-        PlayerName.setText(db.getnametext());
-        PlayerId.setText(db.getidtext());
-        PlayerHealth.setText(db.gethealtext());
+        Player pl = db.healPlayer(EnterPlayerId, HealBy, PlayerName, PlayerId, PlayerHealth);
+        PlayerName.setText(pl.getName());
+        PlayerId.setText(Integer.toString(pl.getId()));
+        PlayerHealth.setText(Integer.toString(pl.getHealth()));
     }
 
     public void goToHealScene(ActionEvent event) throws IOException, SQLException  {
@@ -60,26 +60,7 @@ public class HealHumanController implements Initializable{
         Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
-    }
-
-    public TextField returnEnterPlayerId() {
-        return EnterPlayerId;
-    }
-
-    public TextField returnHealBy() {
-        return HealBy;
-    }
-
-    public TextField returnPlayerName() {
-        return PlayerName;
-    }
-
-    public TextField returnPlayerId() {
-        return PlayerId;
-    }
-
-    public TextField returnPlayerHealth() {
-        return PlayerHealth;
+        db.close();
     }
 
     public void goToMainMenu(ActionEvent event) throws IOException, SQLException {
@@ -88,5 +69,6 @@ public class HealHumanController implements Initializable{
         Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
+        db.close();
     }
 }

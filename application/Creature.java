@@ -1,6 +1,6 @@
 package application;
 
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
 /**
  * Write a description of class Creature here.
@@ -26,11 +26,11 @@ public class Creature
     private String trollSpecies;
     private String wolfColor;
     private String wolfSpecies;
-    private ImageView image;
+    private Image image;
     
     
     public Creature(int i, String n, int h, String b, int a, int d, String s, String ha, 
-    String dc, String ds, String wing, String w, String tc, String ts, String wc, String ws, ImageView im )
+    String dc, String ds, String wing, String w, String tc, String ts, String wc, String ws, Image im )
     {
         id = i;
         name = n;
@@ -115,7 +115,7 @@ public class Creature
         return wolfSpecies;
     }
     
-    public ImageView getImage() {
+    public Image getImage() {
         return image;
     }
 }
