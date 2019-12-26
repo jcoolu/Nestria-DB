@@ -15,6 +15,10 @@ public class Main extends Application {
     private MediaView view;
     private MediaPlayer mediaPlayer;
 
+    /**
+     * Starts program and opens to "Start" screen. User is presented  with a
+     * scene where the only option is to press the button "Start Game."
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -59,14 +63,23 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Launches program (FXML loads and start method is called)
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Returns media player
+     */
     public MediaPlayer getMediaPlayer() {
         return mediaPlayer;
     }
 
+    /**
+     * Returns media view
+     */
     public MediaView getViewPlayer() {
         return view;
     }
