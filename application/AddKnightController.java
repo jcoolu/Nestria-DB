@@ -20,6 +20,27 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javafx.scene.control.ComboBox;
 import javafx.collections.*;
+import javafx.scene.control.TextInputControl;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.scene.control.TextField;
+import javafx.fxml.FXML;
+import java.util.*;
+import javafx.scene.text.Text;
+import javafx.fxml.Initializable;
+import java.net.URL;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import java.io.IOException;
+import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import javafx.embed.swing.SwingFXUtils;
 
 /**
  * Controller for AddKnight.fxml. User can add a Knight to the DB (id HAS to be unique)
@@ -55,7 +76,7 @@ public class AddKnightController extends MainMenuController implements Initializ
     @FXML private ImageView Status;
     @FXML private TextField statusText;
     private NestriaDB db = new NestriaDB();
-    
+
     /*
      * When AddKnightController is called
      */
@@ -232,26 +253,34 @@ public class AddKnightController extends MainMenuController implements Initializ
 
         boolean result = db.addKnight(KnightId, KnightName, KnightAttack, KnightDefense, KnightHealth, weaponNum, shieldNum, kingdomNum, goalNum);
         if(result == true) {
-            try {
-                Image image = new Image(new FileInputStream("application\\Images\\Success.png"));
-                Status.setImage(image);
+            try{ 
+                byte[] array = db.getPicture(77);
+                ByteArrayInputStream bis = new ByteArrayInputStream(array);
+                BufferedImage b = ImageIO.read(bis);
+                Image im = SwingFXUtils.toFXImage(b,null);
+                Status.setImage(im);
                 statusText.setText("Added Knight Successfully");
+                setUpText(); //clears fields  
             }
-            catch (FileNotFoundException e){ 
-            }
-
-            setUpText(); //clears fields    
+            catch (Exception e){
+                System.out.println(e);
+            }  
         }
         else{ 
-            try {
-                Image image = new Image(new FileInputStream("application\\Images\\Error.png"));
-                Status.setImage(image);
+            try{ 
+                byte[] array = db.getPicture(78);
+                ByteArrayInputStream bis = new ByteArrayInputStream(array);
+                BufferedImage b = ImageIO.read(bis);
+                Image im = SwingFXUtils.toFXImage(b,null);
+                Status.setImage(im);
                 statusText.setText("Error: Did not add Knight Successfully. " +
                     "Check to make sure id is unique AND/OR id, attack, defense, and health are integers.");
+                setUpText(); //clears fields  
             }
-            catch (FileNotFoundException e){ 
-            }
-            setUpText(); //clears fields    
+            catch (Exception e){
+                System.out.println(e);
+            }  
         }
+        setUpText(); //clears fields    
     }
 }

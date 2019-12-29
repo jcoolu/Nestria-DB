@@ -1,19 +1,26 @@
 package application; 
 
+import javafx.scene.control.TextInputControl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.*;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import java.util.*;
+import javafx.scene.text.Text;
+import javafx.fxml.Initializable;
+import java.net.URL;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import java.io.IOException;
-import javafx.scene.control.ComboBox;
-import java.net.URL;
-import javafx.fxml.Initializable;
+import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import javafx.embed.swing.SwingFXUtils;
 
 /**
  * Controller for ViewInfo.fxml. User can view options that chooses what items/characters they want to view
@@ -28,8 +35,17 @@ public class ViewInfoController extends StartController implements Initializable
      * When ViewInfo.fxml is called.
      */
     public void initialize(URL url, ResourceBundle rb) {
-        Image im = new Image("\\application\\Images\\ViewInfoBackground.png");
-        image.setImage(im);
+        try{ 
+            byte[] array = db.getPicture(75);
+            ByteArrayInputStream bis = new ByteArrayInputStream(array);
+            BufferedImage b = ImageIO.read(bis);
+            Image im = SwingFXUtils.toFXImage(b,null);
+            image.setImage(im);
+            db.close(); // closes connection
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     /*

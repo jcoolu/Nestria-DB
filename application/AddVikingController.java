@@ -20,6 +20,27 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javafx.scene.control.ComboBox;
 import javafx.collections.*;
+import javafx.scene.control.TextInputControl;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.scene.control.TextField;
+import javafx.fxml.FXML;
+import java.util.*;
+import javafx.scene.text.Text;
+import javafx.fxml.Initializable;
+import java.net.URL;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import java.io.IOException;
+import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import javafx.embed.swing.SwingFXUtils;
 
 /**
  * Controller for AddViking.fxml. User can add a Viking to the DB (id HAS to be unique)
@@ -231,26 +252,34 @@ public class AddVikingController  extends MainMenuController implements Initiali
 
         boolean result = db.addViking(VikingId, VikingName, VikingAttack, VikingDefense, VikingHealth, weaponNum, shieldNum, tribeNum, goalNum);
         if(result == true) {
-            try {
-                Image image = new Image(new FileInputStream("application\\Images\\Success.png"));
-                Status.setImage(image);
+            try{ 
+                byte[] array = db.getPicture(77);
+                ByteArrayInputStream bis = new ByteArrayInputStream(array);
+                BufferedImage b = ImageIO.read(bis);
+                Image im = SwingFXUtils.toFXImage(b,null);
+                Status.setImage(im);
                 StatusText.setText("Added Viking Successfully");
+                setUpText(); //clears fields  
             }
-            catch (FileNotFoundException e){ 
-            }
-
-            setUpText(); //clears fields    
+            catch (Exception e){
+                System.out.println(e);
+            }  
         }
         else{ 
-            try {
-                Image image = new Image(new FileInputStream("application\\Images\\Error.png"));
-                Status.setImage(image);
-                StatusText.setText("Error: Did not add Viking. Check to make sure " +
-                    "id is a unique integer, and attack, defense, and health are valid integers.");
+            try{ 
+                byte[] array = db.getPicture(78);
+                ByteArrayInputStream bis = new ByteArrayInputStream(array);
+                BufferedImage b = ImageIO.read(bis);
+                Image im = SwingFXUtils.toFXImage(b,null);
+                Status.setImage(im);
+                StatusText.setText("Error: Did not add Viking Successfully. " +
+                    "Check to make sure id is unique AND/OR id, attack, defense, and health are integers.");
+                setUpText(); //clears fields  
             }
-            catch (FileNotFoundException e){ 
-            }
-            setUpText(); //clears fields    
+            catch (Exception e){
+                System.out.println(e);
+            }  
         }
+        setUpText(); //clears fields    
     }
 }
