@@ -33,7 +33,7 @@
     <TextField id="Attack" fx:id="KnightAttack" layoutX="133.0" layoutY="222.0" prefHeight="29.0" prefWidth="388.0" />
     <TextField id="Defense" fx:id="KnightDefense" layoutX="133.0" layoutY="281.0" prefHeight="29.0" prefWidth="388.0" />
     <TextField id="Health" fx:id="KnightHealth" layoutX="133.0" layoutY="346.0" prefHeight="29.0" prefWidth="388.0" />
-    <ComboBox id="Weapon" fx:id="KnightWeapon" layoutX="726.0" layoutY="109.0" prefHeight="27.07342529296875" prefWidth="196.0">
+    <ComboBox id="Weapon" fx:id="KnightWeapon" layoutX="726.0" layoutY="109.0" prefHeight="28.0" prefWidth="221.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -42,7 +42,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <ComboBox id="Shield" fx:id="KnightShield" layoutX="726.0" layoutY="161.0" prefHeight="27.07342529296875" prefWidth="196.0">
+    <ComboBox id="Shield" fx:id="KnightShield" layoutX="726.0" layoutY="161.0" prefHeight="28.0" prefWidth="221.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -51,7 +51,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <ComboBox id="Kingdom" fx:id="KnightKingdom" layoutX="726.0" layoutY="223.0" prefHeight="27.07342529296875" prefWidth="196.0">
+    <ComboBox id="Kingdom" fx:id="KnightKingdom" layoutX="726.0" layoutY="223.0" prefHeight="28.0" prefWidth="221.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -62,7 +62,7 @@
     </ComboBox>
     <TextField id="StatusText" fx:id="statusText" editable="false" layoutX="73.0" layoutY="552.0" prefHeight="97.0" prefWidth="356.0" text="" />
     <ImageView fx:id="Status" fitHeight="200.0" fitWidth="200.0" layoutX="490.0" layoutY="449.0" pickOnBounds="true" preserveRatio="true" />
-    <ComboBox id="Kingdom" fx:id="Goal" layoutX="726.0" layoutY="281.0" prefHeight="27.07342529296875" prefWidth="196.0">
+    <ComboBox id="Kingdom" fx:id="Goal" layoutX="726.0" layoutY="281.0" prefHeight="28.0" prefWidth="221.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -73,6 +73,7 @@
     </ComboBox>
     <Text layoutX="616.0" layoutY="296.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Goal:" />
     <Text layoutX="617.0" layoutY="352.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Image:" />
-    <Button fx:id="chooseImage" layoutX="726.0" layoutY="338.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="196.0" text="Choose Image" />
+    <Button fx:id="chooseImage" layoutX="841.0" layoutY="333.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="109.0" text="Choose Image" />
+    <TextField id="Health" fx:id="imageURL" editable="false" layoutX="665.0" layoutY="335.0" prefHeight="29.0" prefWidth="162.0" />
   </children>
 </AnchorPane>

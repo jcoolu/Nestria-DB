@@ -20,15 +20,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javafx.scene.control.ComboBox;
 import javafx.collections.*;
-import javafx.scene.control.TextInputControl;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.scene.control.TextField;
-import java.io.IOException;
 import java.io.*;
 import java.io.ByteArrayOutputStream;
 import java.awt.image.BufferedImage;
@@ -44,22 +35,11 @@ import javafx.stage.FileChooser;
  * Controller for AddKnight.fxml. User can add a Knight to the DB (id HAS to be unique)
  */
 public class AddKnightController extends MainMenuController implements Initializable{
-    ObservableList<String> options = FXCollections.observableArrayList("Destroyer", "Steel Death",
-            "Spikes", "Burn Baby Burn", "Skyward Sword", "Dagger", "Bass Booster", "Katana", "Dragon Sword",
-            "Flicker");
-
-    ObservableList<String> shields = FXCollections.observableArrayList("Destiny", "Norton Shield",
-            "Protector", "Unknown", "Bubble Power", "Worthless", "Boneyard Shield", "Grassland", "I Like Turtles",
-            "MalwareBytes");
-
-    ObservableList<String> kingdoms = FXCollections.observableArrayList("Storm Dragons", "Ivoryfield",
-            "Bellowthorn", "Winged Thunder", "Boudlerroses", "Waverns", "Templars of the Forest", "Righteous Paladins", "Hackers",
-            "Broken Dynasty");
-
-    ObservableList<String> goals = FXCollections.observableArrayList("Defeat Scaulding", "Defeat Vexos",
-            "Defeat Wyverns", "Defeat Templars of the Forest", "Defeat Skylanders", "Defeat three dragons", "Defeat ten skeletons", 
-            "Defeat five trolls", "Defeat eight wolves",
-            "Defeat Hackers");
+    private NestriaDB db = new NestriaDB();
+    ObservableList<String> options = db.getWeaponsForCombo();
+    ObservableList<String> shields = db.getShieldsForCombo();
+    ObservableList<String> kingdoms = db.getKingdomsForCombo();
+    ObservableList<String> goals = db.getGoalsForCombo();
 
     @FXML private TextField KnightId;
     @FXML private TextField KnightName;
@@ -74,10 +54,9 @@ public class AddKnightController extends MainMenuController implements Initializ
     @FXML private ImageView Status;
     @FXML private TextField statusText;
     @FXML private Button chooseImage;
+    @FXML private TextField imageURL;
     private FileChooser fileChooser;
     private File file;
-
-    private NestriaDB db = new NestriaDB();
 
     /*
      * When AddKnightController is called
@@ -96,6 +75,8 @@ public class AddKnightController extends MainMenuController implements Initializ
         Goal.getItems().addAll(goals);
         statusText.setText("");
         Goal.getSelectionModel().select(goals.get(0));
+        
+        // for choose image button
         chooseImage.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
                 public void handle(ActionEvent event) {
@@ -109,7 +90,7 @@ public class AddKnightController extends MainMenuController implements Initializ
                     );
                     Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
                     file = fileChooser.showOpenDialog(window);
-                    System.out.println(file);
+                    imageURL.setText(file.toString()); //shows file path in textfield
                 }
             });
     }
@@ -129,145 +110,11 @@ public class AddKnightController extends MainMenuController implements Initializ
      * Adds a Knight to DB.
      */
     public void addKnight() {
-        String getShield = KnightShield.getSelectionModel().getSelectedItem().toString();
-        int shieldNum = 1;
-        switch(getShield) {
-            case "Destiny":
-            shieldNum = 1;
-            break;
-            case "Norton Shield":
-            shieldNum = 2;
-            break;
-            case "Protector":
-            shieldNum = 3;
-            break;
-            case "Unknown":
-            shieldNum = 4;
-            break;
-            case "Bubble Power":
-            shieldNum = 5;
-            break;
-            case "Worthless":
-            shieldNum = 6;
-            break;
-            case "Boneyard Shield":
-            shieldNum = 7;
-            break;
-            case "Grassland":
-            shieldNum = 8;
-            break;
-            case "I Like Turtles":
-            shieldNum = 9;
-            break;
-            case "MalwareBytes":
-            shieldNum = 10;
-            break;
-        }
-
-        String getWeapon = KnightWeapon.getSelectionModel().getSelectedItem().toString();
-        int weaponNum = 1;
-        switch(getWeapon) {
-            case "Destroyer":
-            weaponNum = 1;
-            break;
-            case "Steel Death":
-            weaponNum = 2;
-            break;
-            case "Spikes":
-            weaponNum = 3;
-            break;
-            case "Burn Baby Burn":
-            weaponNum = 4;
-            break;
-            case "Skyward Sword":
-            weaponNum = 5;
-            break;
-            case "Dagger":
-            weaponNum = 6;
-            break;
-            case "Bass Booster":
-            weaponNum = 7;
-            break;  
-            case "Katana":
-            weaponNum = 8;
-            break;
-            case "Dragon Sword":
-            weaponNum = 9;
-            break;
-            case "Flicker":
-            weaponNum = 10;
-            break;
-        }
-
-        String getKingdom = KnightKingdom.getSelectionModel().getSelectedItem().toString();
-        int kingdomNum = 1;
-        switch(getKingdom) {
-            case "Storm Dragons":
-            kingdomNum = 1;
-            break;
-            case "Ivoryfield":
-            kingdomNum = 2;
-            break;
-            case "Bellowthorn":
-            kingdomNum = 3;
-            break;
-            case "Winged Thunder":
-            kingdomNum = 4;
-            break;
-            case "Boulderroses":
-            kingdomNum = 5;
-            break;
-            case "Waverns":
-            kingdomNum = 6;
-            break;
-            case "Templars of the Forest":
-            kingdomNum = 7;
-            break;
-            case "Righteous Paladins":
-            kingdomNum = 8;
-            break;
-            case "Hackers":
-            kingdomNum = 9;
-            break;
-            case "Broken Dynasty":
-            kingdomNum = 10;
-            break;
-        }
-
-        String getGoal = Goal.getSelectionModel().getSelectedItem().toString();
-        int goalNum = 1;
-        switch(getGoal) {
-            case "Defeat Scaulding":
-            goalNum = 1;
-            break;
-            case "Defeat Vexos":
-            goalNum = 2;
-            break;
-            case "Defeat Wyverns":
-            goalNum = 3;
-            break;  
-            case "Defeat Templars of the Forest":
-            goalNum = 4;
-            break;
-            case "Defeat Skylanders":
-            goalNum = 5;
-            break;
-            case "Defeat three dragons":
-            goalNum = 6;
-            break;
-            case "Defeat ten skeletons":
-            goalNum = 7;
-            break;
-            case "Defeat five trolls":
-            goalNum = 8;
-            break;
-            case "Defeat eight wolves":
-            goalNum = 9;
-            break;
-            case "Defeat Hackers":
-            goalNum = 10;
-            break;
-        }
+        int shieldNum = KnightShield.getSelectionModel().getSelectedIndex() + 1;
+        int weaponNum = KnightWeapon.getSelectionModel().getSelectedIndex() + 1;
+        int kingdomNum = KnightKingdom.getSelectionModel().getSelectedIndex() + 1;
+        int goalNum = Goal.getSelectionModel().getSelectedIndex() + 1;
+      
         byte[] fileContent;
         // initialize a byte array of size of the file
         if(file == null) {

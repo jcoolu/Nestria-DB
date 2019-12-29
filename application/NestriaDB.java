@@ -1101,5 +1101,185 @@ public class NestriaDB {
         }
         return image;
     }
+    
+    public ObservableList<String> getWeaponsForCombo() {
+        ObservableList<String> weapons = FXCollections.observableArrayList();
+
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+        int id, attack;
+        String name, sql;
+
+        byte[] array;
+
+        if (!isopen) return null;
+
+        try {
+            sql = "SELECT Weapon.Name FROM Weapon;";
+            stmt = conn.prepareStatement(sql);
+            rset = stmt.executeQuery();
+
+            while (rset.next()) {
+                name = rset.getString(1);
+                weapons.add(name);
+            }
+            try{
+                stmt.close();
+                rset.close();
+                conn.commit();
+            }
+            catch (Exception e) {
+
+            }
+        }
+        catch (Exception e) {
+            return null;
+        }
+        return weapons; 
+    }
+    
+    public ObservableList<String> getShieldsForCombo() {
+        ObservableList<String> shields = FXCollections.observableArrayList();
+
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+        int id, attack;
+        String name, sql;
+
+        byte[] array;
+
+        if (!isopen) return null;
+
+        try {
+            sql = "SELECT Shield.Name FROM Shield;";
+            stmt = conn.prepareStatement(sql);
+            rset = stmt.executeQuery();
+
+            while (rset.next()) {
+                name = rset.getString(1);
+                shields.add(name);
+            }
+            try{
+                stmt.close();
+                rset.close();
+                conn.commit();
+            }
+            catch (Exception e) {
+
+            }
+        }
+        catch (Exception e) {
+            return null;
+        }
+        return shields; 
+    }
+    
+    public ObservableList<String> getKingdomsForCombo() {
+        ObservableList<String> kingdoms = FXCollections.observableArrayList();
+
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+        int id, attack;
+        String name, sql;
+
+        byte[] array;
+
+        if (!isopen) return null;
+
+        try {
+            sql = "SELECT Kingdom.Name FROM Kingdom;";
+            stmt = conn.prepareStatement(sql);
+            rset = stmt.executeQuery();
+
+            while (rset.next()) {
+                name = rset.getString(1);
+                kingdoms.add(name);
+            }
+            try{
+                stmt.close();
+                rset.close();
+                conn.commit();
+            }
+            catch (Exception e) {
+
+            }
+        }
+        catch (Exception e) {
+            return null;
+        }
+        return kingdoms; 
+    }
+    
+    public ObservableList<String> getGoalsForCombo() {
+        ObservableList<String> goals = FXCollections.observableArrayList();
+
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+        int id, attack;
+        String name, sql;
+
+        byte[] array;
+
+        if (!isopen) return null;
+
+        try {
+            sql = "SELECT Goal.Objective FROM Goal;";
+            stmt = conn.prepareStatement(sql);
+            rset = stmt.executeQuery();
+
+            while (rset.next()) {
+                name = rset.getString(1);
+                goals.add(name);
+            }
+            try{
+                stmt.close();
+                rset.close();
+                conn.commit();
+            }
+            catch (Exception e) {
+
+            }
+        }
+        catch (Exception e) {
+            return null;
+        }
+        return goals; 
+    }
+    
+    public ObservableList<String> getTribesForCombo() {
+        ObservableList<String> tribes = FXCollections.observableArrayList();
+
+        PreparedStatement stmt = null;
+        ResultSet rset = null;
+        int id, attack;
+        String name, sql;
+
+        byte[] array;
+
+        if (!isopen) return null;
+
+        try {
+            sql = "SELECT Tribe.Name FROM Tribe;";
+            stmt = conn.prepareStatement(sql);
+            rset = stmt.executeQuery();
+
+            while (rset.next()) {
+                name = rset.getString(1);
+                tribes.add(name);
+            }
+            try{
+                stmt.close();
+                rset.close();
+                conn.commit();
+            }
+            catch (Exception e) {
+
+            }
+        }
+        catch (Exception e) {
+            return null;
+        }
+        return tribes; 
+    }
 }
 
