@@ -10,23 +10,20 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import java.util.*;
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javafx.scene.text.Text;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javafx.scene.control.ComboBox;
 import javafx.collections.*;
 
+/**
+ * Controller for AddKnight.fxml. User can add a Knight to the DB (id HAS to be unique)
+ */
 public class AddKnightController implements Initializable{
     ObservableList<String> options = FXCollections.observableArrayList("Destroyer", "Steel Death",
             "Spikes", "Burn Baby Burn", "Skyward Sword", "Dagger", "Bass Booster", "Katana", "Dragon Sword",
@@ -57,9 +54,9 @@ public class AddKnightController implements Initializable{
     @FXML private ImageView BackgroundPic;
     @FXML private ImageView Status;
     @FXML private TextField statusText;
-
     private NestriaDB db = new NestriaDB();
-    /**
+    
+    /*
      * When AddKnightController is called
      */
     public void initialize(URL url, ResourceBundle rb) {
@@ -78,6 +75,9 @@ public class AddKnightController implements Initializable{
         Goal.getSelectionModel().select(goals.get(0));
     }
 
+    /*
+     * Clears textfields.
+     */
     public void setUpText() {
         KnightId.setText("");
         KnightName.setText("");
@@ -86,6 +86,9 @@ public class AddKnightController implements Initializable{
         KnightDefense.setText("");
     }
 
+    /*
+     * Adds a Knight to DB.
+     */
     public void addKnight() {
         String getShield = KnightShield.getSelectionModel().getSelectedItem().toString();
         int shieldNum = 1;
@@ -252,7 +255,10 @@ public class AddKnightController implements Initializable{
         }
     }
 
-    public void goToAddScene(ActionEvent event) throws IOException, SQLException {
+    /*
+     * Go to AddPlayerScene1Controller.
+     */
+    public void goToAddScene(ActionEvent event) throws IOException {
         AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("AddPlayerScene1.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
 

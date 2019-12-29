@@ -1,6 +1,5 @@
 package application; 
 
-import javafx.scene.control.TextInputControl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,20 +9,11 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import java.util.*;
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javafx.scene.text.Text;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.awt.image.BufferedImage;
@@ -31,6 +21,10 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
 
+/**
+ * Controller for Arena.fxml. User (the player) can either attack or defend themselves from the enemy 
+ * (the creature). 
+ */
 public class ArenaController implements Initializable{
 
     @FXML private TextField PlayerName;
@@ -48,7 +42,7 @@ public class ArenaController implements Initializable{
     @FXML private ImageView BackgroundPic;
     private int creatureId;
     private int playerId;
-    NestriaDB db = new NestriaDB();
+    private NestriaDB db = new NestriaDB();
     private ArrayList<Creature> creatures;
     private ArrayList<Player> players;
 
@@ -64,13 +58,17 @@ public class ArenaController implements Initializable{
         db.close();
     }
 
-    /**
+    /*
      * When ArenaController is called
      */
     public void initialize(URL url, ResourceBundle rb) {
         setUp();
     }
 
+    /*
+     * Sets up creature and player. Both are randomized. Creature's health, name, attack, and defense are shown. 
+     * The player's name, attack, defense, health, weapon, and shield are shown as well. 
+     */
     @FXML
     public void setUp() {
         players = db.getPlayers();
@@ -97,6 +95,9 @@ public class ArenaController implements Initializable{
         }
     }
 
+    /*
+     * Both creature and player attack each other. 
+     */
     public void attack() {    
         db.attack(creatures.get(creatureId), players.get(playerId));
         creatures.set(creatureId, db.getCreature(creatures.get(creatureId).getId()));
@@ -104,12 +105,18 @@ public class ArenaController implements Initializable{
         setTextFields();
     }
 
+    /*
+     * Player defends themselves from creature's attack. 
+     */
     public void defend() {
         db.defend(creatures.get(creatureId), players.get(playerId));
         players.set(playerId, db.getPlayer(players.get(playerId).getId()));
         setTextFields();
     }
     
+    /*
+     * Get's player's and creature's current info/stats from their respective array lists.
+     */
     public void setTextFields() {
         PlayerName.setText(players.get(playerId).getName());
         PlayerAttack.setText(Integer.toString(players.get(playerId).getAttack()));

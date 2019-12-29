@@ -10,23 +10,20 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import java.util.*;
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javafx.scene.text.Text;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javafx.scene.control.ComboBox;
 import javafx.collections.*;
 
+/**
+ * Controller for AddViking.fxml. User can add a Viking to the DB (id HAS to be unique)
+ */
 public class AddVikingController implements Initializable{
     private ObservableList<String> options = FXCollections.observableArrayList("Destroyer", "Steel Death",
             "Spikes", "Burn Baby Burn", "Skyward Sword", "Dagger", "Bass Booster", "Katana", "Dragon Sword",
@@ -57,8 +54,7 @@ public class AddVikingController implements Initializable{
     @FXML private ImageView BackgroundPic;
     @FXML private ImageView Status;
     @FXML private TextField StatusText;
-
-    NestriaDB db = new NestriaDB();
+    private NestriaDB db = new NestriaDB();
     /**
      * When AddVikingController is called
      */
@@ -78,6 +74,9 @@ public class AddVikingController implements Initializable{
         StatusText.setText("");
     }
 
+    /*
+     * Clears textfields. 
+     */
     public void setUpText() {
         VikingId.setText("");
         VikingName.setText("");
@@ -86,6 +85,9 @@ public class AddVikingController implements Initializable{
         VikingDefense.setText("");
     }
 
+    /*
+     * Adds a viking to the DB.
+     */
     public void addViking() {
         String getShield = VikingShield.getSelectionModel().getSelectedItem().toString();
         int shieldNum=1;
@@ -252,7 +254,10 @@ public class AddVikingController implements Initializable{
         }
     }
 
-    public void goToAddScene(ActionEvent event) throws IOException, SQLException {
+    /*
+     * Go to AddPlayerScene1Controller.
+     */
+    public void goToAddScene(ActionEvent event) throws IOException {
         AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("AddPlayerScene1.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
 

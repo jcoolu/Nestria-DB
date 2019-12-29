@@ -25,13 +25,16 @@ public class ViewInfoController implements Initializable{
     private NestriaDB db = new NestriaDB();
 
     /**
-     * When AddKnightController is called
+     * When ViewInfo.fxml is called.
      */
     public void initialize(URL url, ResourceBundle rb) {
         Image im = new Image("\\application\\Images\\ViewInfoBackground.png");
         image.setImage(im);
     }
 
+    /*
+     * Go to ViewPlayerController.
+     */
     public void goToViewPlayer(ActionEvent event) throws IOException {
         AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("ViewPlayers.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
@@ -40,6 +43,9 @@ public class ViewInfoController implements Initializable{
         window.show(); 
     }
 
+    /*
+     * Go to ViewCreatureController.
+     */
     public void goToViewCreature(ActionEvent event) throws IOException {
         AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("ViewCreatures.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
@@ -48,6 +54,9 @@ public class ViewInfoController implements Initializable{
         window.show();
     }
 
+    /*
+     * Go to ViewWeaponController
+     */
     public void goToViewWeapon(ActionEvent event) throws IOException {
         AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("ViewWeapons.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
@@ -56,6 +65,9 @@ public class ViewInfoController implements Initializable{
         window.show();
     }
 
+    /*
+     * Go to ViewShieldController
+     */
     public void goToViewShield(ActionEvent event) throws IOException {
         AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("ViewShields.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
@@ -64,6 +76,9 @@ public class ViewInfoController implements Initializable{
         window.show();
     }
 
+    /*
+     * Go to ViewSceneryController
+     */
     public void goToViewScenery(ActionEvent event) throws IOException {
         AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("ViewScenery.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
@@ -72,6 +87,9 @@ public class ViewInfoController implements Initializable{
         window.show();
     }
 
+    /*
+     * Go to MainMenuController
+     */
     public void goToMainMenu(ActionEvent event) throws IOException {
         AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
