@@ -30,7 +30,7 @@ public class MainMenuController implements Initializable {
     @FXML private ImageView background;
     protected NestriaDB db = new NestriaDB();
 
-    /**
+    /*
      * Setup for MainMenu.fxml.
      */
     public void initialize(URL url, ResourceBundle rb) {
@@ -47,7 +47,7 @@ public class MainMenuController implements Initializable {
         }
     }
 
-    /**
+    /*
      * Sends user to Arena.fxml.
      */
     public void goToArena(ActionEvent event) throws IOException {
@@ -59,7 +59,7 @@ public class MainMenuController implements Initializable {
         db.close(); // closes connection
     }
 
-    /**
+    /*
      * Sends user to AddPlayerScene1.fxml.
      */
     public void goToAddPlayer(ActionEvent event) throws IOException {
@@ -72,7 +72,7 @@ public class MainMenuController implements Initializable {
         db.close(); // closes connection
     }
 
-    /**
+    /*
      * Sends user to HowToPlay.fxml.
      */
     public void goToHowToPlay(ActionEvent event) throws IOException {
@@ -85,7 +85,7 @@ public class MainMenuController implements Initializable {
         db.close(); // closes connection
     }
 
-    /**
+    /*
      * Sends user to HealPlayer.fxml.
      */
     public void goToHealPlayer(ActionEvent event) throws IOException {
@@ -98,7 +98,7 @@ public class MainMenuController implements Initializable {
         db.close(); // closes connection
     }
 
-    /**
+    /*
      * Sends user to ViewInfo.fxml.
      */
     public void goToViewInfo(ActionEvent event) throws IOException {
@@ -111,7 +111,7 @@ public class MainMenuController implements Initializable {
         db.close(); // closes connection
     }
 
-    /**
+    /*
      * Quits program.
      */
     public void quitGame(ActionEvent event) throws IOException{

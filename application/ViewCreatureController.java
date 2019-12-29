@@ -51,7 +51,7 @@ public class ViewCreatureController extends MainMenuController implements Initia
     @FXML private TableColumn<Creature, String> wolfSpeciesColumn;
     @FXML private TableColumn<Creature, ImageView> imageColumn;
 
-    /**
+    /*
      * Setup for ViewCreature.fxml. Sets columns and rows for creature table.
      */
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,7 +75,7 @@ public class ViewCreatureController extends MainMenuController implements Initia
         creatures.setItems(db.viewCreatures());
     }
 
-    /**
+    /*
      * Return creature table.
      */
     public TableView getCreatureTable() {

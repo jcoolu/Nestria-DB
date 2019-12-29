@@ -1,33 +1,25 @@
 package application;
 
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javafx.scene.control.TextField;
-import javafx.fxml.FXML;
 import java.util.*;
-import javafx.scene.control.TableView;
-import javafx.collections.*;
 import javafx.scene.image.ImageView;
 
-
 /**
- * Write a description of class Weapon here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Scenery class. Creates a Scenery which has an id (integer), region (string), 
+ * effect (string), and an image. 
  */
 public class Scenery
 {
-    private int id;
+    private int id; 
     private String region;
     private String effect;
     private ImageView image;
 
-    /**
-     * Constructor for objects of class Weapon
+    /*
+     * Constructor for objects of class Scenery.
+     * i - id of Scenery
+     * n - region of Scenery
+     * e - effect of Scenery
+     * b - image of Scenery
      */
     public Scenery(int i, String n, String e, ImageView b)
     {
@@ -37,18 +29,30 @@ public class Scenery
         image = b;
     }
     
+    /*
+     * Returns id.
+     */
     public int getId() {
         return id;
     }
     
+    /*
+     * Returns region. 
+     */
     public String getRegion() {
         return region;
     }
     
+    /*
+     * Returns effect.
+     */
     public String getEffect() {
         return effect;
     }
     
+    /*
+     * Returns image.
+     */
     public ImageView getImage() {
         return image;
     }
