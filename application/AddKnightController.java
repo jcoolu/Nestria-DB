@@ -28,19 +28,17 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
-import javafx.fxml.FXML;
-import java.util.*;
-import javafx.scene.text.Text;
-import javafx.fxml.Initializable;
-import java.net.URL;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
 import java.io.IOException;
 import java.io.*;
 import java.io.ByteArrayOutputStream;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.stage.FileChooser;
 
 /**
  * Controller for AddKnight.fxml. User can add a Knight to the DB (id HAS to be unique)
@@ -75,6 +73,10 @@ public class AddKnightController extends MainMenuController implements Initializ
     @FXML private ImageView BackgroundPic;
     @FXML private ImageView Status;
     @FXML private TextField statusText;
+    @FXML private Button chooseImage;
+    private FileChooser fileChooser;
+    private File file;
+
     private NestriaDB db = new NestriaDB();
 
     /*
@@ -94,6 +96,22 @@ public class AddKnightController extends MainMenuController implements Initializ
         Goal.getItems().addAll(goals);
         statusText.setText("");
         Goal.getSelectionModel().select(goals.get(0));
+        chooseImage.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    fileChooser = new FileChooser();
+                    fileChooser.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("All Images", "*.*"),
+                        new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                        new FileChooser.ExtensionFilter("GIF", "*.gif"),
+                        new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+                        new FileChooser.ExtensionFilter("PNG", "*.png")
+                    );
+                    Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
+                    file = fileChooser.showOpenDialog(window);
+                    System.out.println(file);
+                }
+            });
     }
 
     /*
@@ -250,8 +268,35 @@ public class AddKnightController extends MainMenuController implements Initializ
             goalNum = 10;
             break;
         }
+        byte[] fileContent;
+        // initialize a byte array of size of the file
+        if(file == null) {
+            fileContent = null;
+        }
+        else {
+            fileContent = new byte[(int) file.length()];
+            FileInputStream inputStream = null;
+            try {
+                // create an input stream pointing to the file
+                inputStream = new FileInputStream(file);
+                // read the contents of file into byte array
+                inputStream.read(fileContent);
+            } catch (IOException e) {
 
-        boolean result = db.addKnight(KnightId, KnightName, KnightAttack, KnightDefense, KnightHealth, weaponNum, shieldNum, kingdomNum, goalNum);
+            } finally {
+                // close input stream
+                if (inputStream != null) {
+                    try{
+                        inputStream.close();
+                    }
+                    catch(Exception e) {
+
+                    }
+                }
+            }
+        }
+        
+        boolean result = db.addKnight(KnightId, KnightName, KnightAttack, KnightDefense, KnightHealth, weaponNum, shieldNum, kingdomNum, goalNum, fileContent);
         if(result == true) {
             try{ 
                 byte[] array = db.getPicture(77);

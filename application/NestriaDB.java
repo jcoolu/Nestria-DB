@@ -18,6 +18,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
+import javax.sql.rowset.serial.SerialBlob;
 
 public class NestriaDB {
     private Connection conn;
@@ -267,7 +268,7 @@ public class NestriaDB {
     /**
      * Used in AddKnight. Adds a Knight to DB. Returns true or false.
      */
-    public boolean addKnight(TextField id, TextField name, TextField attack, TextField defense, TextField health, int weapon, int shield, int kingdom, int goal) {
+    public boolean addKnight(TextField id, TextField name, TextField attack, TextField defense, TextField health, int weapon, int shield, int kingdom, int goal, byte[] fl) {
         PreparedStatement stmt = null;
         ResultSet rset = null;
         String sql, nameTxt, attackTxt, defenseTxt, healthTxt;
@@ -303,10 +304,40 @@ public class NestriaDB {
             stmt.setInt(1, knightId);
             stmt.setInt(2, kingdom);
 
+            // Execute the update
+            stmt.executeUpdate();
             stmt.close();
             conn.commit();
-            result = true;
 
+            sql = "INSERT INTO Picture(ImageFile) VALUES (?);";
+            stmt = conn.prepareStatement(sql);
+            stmt.setBytes(1, fl);
+
+            // Execute the update
+            stmt.executeUpdate();
+            stmt.close();
+            conn.commit();
+
+            sql = "SELECT Id FROM Picture WHERE Id = (SELECT MAX(Id) FROM Picture);";
+            stmt = conn.prepareStatement(sql);
+            rset = stmt.executeQuery();
+
+            int picId = rset.getInt(1);
+            stmt.close();
+            rset.close();
+            conn.commit();
+
+            sql = "INSERT INTO PlayerPics(Picture, Player) VALUES (?,?);";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, picId);
+            stmt.setInt(2, knightId);
+
+            stmt.executeUpdate();
+            stmt.close();
+            rset.close();
+            conn.commit();
+
+            result = true;
         } catch (Exception e) {
             System.out.printf("%s%n", e.getMessage());
 
@@ -413,21 +444,20 @@ public class NestriaDB {
                 weapon = rset.getString(8);
                 kingdom = rset.getString(9);
                 tribe = rset.getString(10);
-                if(i>19) {
-                    table.add(new Player(id, name, health, attack, defense, weapon, shield, goal, kingdom, tribe, null));
-                    i++;
-                }
-                else{
-                    array = rset.getBytes(11);
+
+                array = rset.getBytes(11);
+                if(array != null) {
                     ByteArrayInputStream bis = new ByteArrayInputStream(array);
                     BufferedImage b = ImageIO.read(bis);
                     image = SwingFXUtils.toFXImage(b,null);
-
-                    table.add(new Player(id, name, health, attack, defense, weapon, shield, goal, kingdom, tribe, im = new ImageView(image)));
-                    im.setFitHeight(200);
-                    im.setFitWidth(150);
-                    i++;
                 }
+                else {
+                    image = null;
+                }
+                table.add(new Player(id, name, health, attack, defense, weapon, shield, goal, kingdom, tribe, im = new ImageView(image)));
+                im.setFitHeight(200);
+                im.setFitWidth(150);
+                i++;
             }
             try{
                 stmt.close();
@@ -989,9 +1019,9 @@ public class NestriaDB {
         }
         return cr;
     }
-    
+
     public Image getCreaturePic(int idm) {
-        
+
         PreparedStatement stmt = null;
         ResultSet rset = null;
         Creature cr = null;
@@ -1015,7 +1045,6 @@ public class NestriaDB {
                 BufferedImage b = ImageIO.read(bis);
                 image = SwingFXUtils.toFXImage(b,null);
 
-
             }
             conn.commit();
         }
@@ -1032,7 +1061,7 @@ public class NestriaDB {
         }
         return image;
     }
-    
+
     public Image getPlayerPic(int idm) {
         PreparedStatement stmt = null;
         ResultSet rset = null;
