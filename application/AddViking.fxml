@@ -20,7 +20,7 @@
       </font>
     </Button>
     <Text layoutX="100.0" layoutY="129.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="ID: " />
-    <Button id="GoBack" layoutX="72.0" layoutY="39.0" mnemonicParsing="false" onAction="#goToAddScene" prefHeight="29.0" prefWidth="124.0" text="Go Back" />
+    <Button id="GoBack" layoutX="72.0" layoutY="39.0" mnemonicParsing="false" onAction="#goToAddPlayer" prefHeight="29.0" prefWidth="124.0" text="Go Back" />
     <Text layoutX="108.0" layoutY="187.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
     <Text layoutX="106.0" layoutY="249.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Attack:" />
     <Text layoutX="112.0" layoutY="308.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Defense:" />

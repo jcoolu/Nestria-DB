@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * Controller for HealPlayer.fxml. User can choose to heal either a player or creature.
  */
-public class HealPlayerController implements Initializable {
+public class HealPlayerController extends StartController implements Initializable {
     
     @FXML private ImageView image;
     
@@ -50,16 +50,5 @@ public class HealPlayerController implements Initializable {
         Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();  
-    }
-    
-    /*
-     * Go to MainMenuController
-     */
-    public void goToMainMenu(ActionEvent event) throws IOException {
-        AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
-        window.setScene(tableViewScene);
-        window.show();
     }
 }

@@ -17,7 +17,7 @@ import javafx.collections.*;
 /**
  * Controller for HealCreature.fxml. Heals creature by user entering their id and health increase. 
  */
-public class HealCreatureController implements Initializable{
+public class HealCreatureController extends MainMenuController implements Initializable{
 
     @FXML private TextField EnterCreatureId;
     @FXML private TextField HealBy;
@@ -46,17 +46,5 @@ public class HealCreatureController implements Initializable{
         CreatureName.setText(cr.getName());
         CreatureId.setText(Integer.toString(cr.getId()));
         CreatureHealth.setText(Integer.toString(cr.getHealth()));
-    }
-
-    /*
-     * Go to HealPlayer.fxml
-     */
-    public void goToHealScene(ActionEvent event) throws IOException  {
-        AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("HealPlayer.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
-        window.setScene(tableViewScene);
-        window.show();
-        db.close();
     }
 }

@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * Controller for HealHuman.fxml. Heals player by user entering their id and health increase. 
  */
-public class HealHumanController implements Initializable{
+public class HealHumanController extends MainMenuController implements Initializable{
 
     @FXML private TextField EnterPlayerId;
     @FXML private TextField HealBy;
@@ -45,17 +45,5 @@ public class HealHumanController implements Initializable{
         PlayerName.setText(pl.getName());
         PlayerId.setText(Integer.toString(pl.getId()));
         PlayerHealth.setText(Integer.toString(pl.getHealth()));
-    }
-
-    /*
-     * Go to HealPlayer.fxml
-     */    
-    public void goToHealScene(ActionEvent event) throws IOException  {
-        AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("HealPlayer.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
-        window.setScene(tableViewScene);
-        window.show();
-        db.close();
     }
 }

@@ -25,7 +25,7 @@ import javafx.embed.swing.SwingFXUtils;
  * Controller for Arena.fxml. User (the player) can either attack or defend themselves from the enemy 
  * (the creature). 
  */
-public class ArenaController implements Initializable{
+public class ArenaController extends StartController implements Initializable{
 
     @FXML private TextField PlayerName;
     @FXML private TextField PlayerAttack;
@@ -45,18 +45,6 @@ public class ArenaController implements Initializable{
     private NestriaDB db = new NestriaDB();
     private ArrayList<Creature> creatures;
     private ArrayList<Player> players;
-
-    /** 
-     * Go back to Main Menu
-     */
-    public void goBack(ActionEvent event) throws IOException {
-        AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
-        window.setScene(tableViewScene);
-        window.show();
-        db.close();
-    }
 
     /*
      * When ArenaController is called
@@ -129,5 +117,4 @@ public class ArenaController implements Initializable{
         CreatureAttack.setText(Integer.toString(creatures.get(creatureId).getAttack()));
         CreatureDefense.setText(Integer.toString(creatures.get(creatureId).getDefense()));
     }
-    
 }

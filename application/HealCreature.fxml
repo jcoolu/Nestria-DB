@@ -14,7 +14,7 @@
     <ImageView fitHeight="720.0" fitWidth="1280.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" />
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff1cc" height="720.0" layoutX="0.0" layoutY="0.0" stroke="BLACK" strokeType="INSIDE" width="564.0" />
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#66a3ff" height="720.0" layoutX="564.0" layoutY="0.0" stroke="BLACK" strokeType="INSIDE" width="716.47265625" />
-    <Button layoutX="40.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToHealScene" prefHeight="34.0" prefWidth="141.0" text="Go Back" />
+    <Button layoutX="40.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToHealPlayer" prefHeight="34.0" prefWidth="141.0" text="Go Back" />
     <Text layoutX="200.0" layoutY="112.0" scaleX="2.702886091460675" scaleY="2.333015913742516" strokeType="OUTSIDE" strokeWidth="0.0" text="Id: " />
     <TextField fx:id="EnterCreatureId" layoutX="254.0" layoutY="95.0" prefHeight="30.587310791015625" prefWidth="216.0" />
     <Button layoutX="181.0" layoutY="255.0" mnemonicParsing="false" onAction="#heal" prefHeight="66.0" prefWidth="225.0" text="Heal Creature">

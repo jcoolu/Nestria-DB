@@ -18,7 +18,7 @@ import javafx.fxml.Initializable;
 /**
  * Controller for AddPlayer.fxml. User can either add a Knight or a Viking. 
  */
-public class AddPlayerScene1Controller implements Initializable {
+public class AddPlayerScene1Controller extends StartController implements Initializable {
     @FXML private ImageView image;
     
     /*
@@ -52,17 +52,4 @@ public class AddPlayerScene1Controller implements Initializable {
         window.setScene(tableViewScene);
         window.show();
     }
-
-    /*
-     * Go to main menu. 
-     */
-    public void goToMainMenu(ActionEvent event) throws IOException, SQLException {
-        AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-
-        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
-        window.setScene(tableViewScene);
-        window.show();
-    }
-
 }

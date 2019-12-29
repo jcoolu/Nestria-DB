@@ -19,7 +19,7 @@ import javafx.fxml.Initializable;
  * Controller for ViewInfo.fxml. User can view options that chooses what items/characters they want to view
  * in the DB.
  */
-public class ViewInfoController implements Initializable{
+public class ViewInfoController extends StartController implements Initializable{
 
     @FXML private ImageView image;
     private NestriaDB db = new NestriaDB();
@@ -87,14 +87,4 @@ public class ViewInfoController implements Initializable{
         window.show();
     }
 
-    /*
-     * Go to MainMenuController
-     */
-    public void goToMainMenu(ActionEvent event) throws IOException {
-        AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
-        window.setScene(tableViewScene);
-        window.show();
-    }
 }

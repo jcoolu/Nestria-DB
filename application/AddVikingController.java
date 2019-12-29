@@ -24,7 +24,7 @@ import javafx.collections.*;
 /**
  * Controller for AddViking.fxml. User can add a Viking to the DB (id HAS to be unique)
  */
-public class AddVikingController implements Initializable{
+public class AddVikingController  extends MainMenuController implements Initializable{
     private ObservableList<String> options = FXCollections.observableArrayList("Destroyer", "Steel Death",
             "Spikes", "Burn Baby Burn", "Skyward Sword", "Dagger", "Bass Booster", "Katana", "Dragon Sword",
             "Flicker");
@@ -252,17 +252,5 @@ public class AddVikingController implements Initializable{
             }
             setUpText(); //clears fields    
         }
-    }
-
-    /*
-     * Go to AddPlayerScene1Controller.
-     */
-    public void goToAddScene(ActionEvent event) throws IOException {
-        AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("AddPlayerScene1.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-
-        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
-        window.setScene(tableViewScene);
-        window.show();
     }
 }
