@@ -1,26 +1,10 @@
 
 package application;
 
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javafx.scene.control.TextField;
-import javafx.fxml.FXML;
-import java.util.*;
-import javafx.scene.control.TableView;
-import javafx.collections.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-
-
 /**
- * Write a description of class Weapon here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Weapon class. A weapon has an id (integer), name (string), attack (integer), and image.
  */
 public class Weapon
 {
@@ -29,8 +13,12 @@ public class Weapon
     private int attack;
     private ImageView image;
 
-    /**
+    /*
      * Constructor for objects of class Weapon
+     * i - id
+     * n - name
+     * a - attack
+     * im - image (view)
      */
     public Weapon(int i, String n, int a, ImageView im)
     {
@@ -40,18 +28,30 @@ public class Weapon
         image = im;
     }
     
+    /*
+     * Returns id.
+     */
     public int getId() {
         return id;
     }
     
+    /*
+     * Returns name.
+     */
     public String getName() {
         return name;
     }
     
+    /*
+     * Returns attack.
+     */
     public int getAttack() {
         return attack;
     }
     
+    /*
+     * Returns image. (view)
+     */
     public ImageView getImage() {
         return image;
     }

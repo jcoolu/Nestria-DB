@@ -19,7 +19,7 @@ public class Scenery
      * i - id of Scenery
      * n - region of Scenery
      * e - effect of Scenery
-     * b - image of Scenery
+     * b - image of Scenery (view)
      */
     public Scenery(int i, String n, String e, ImageView b)
     {
@@ -51,7 +51,7 @@ public class Scenery
     }
     
     /*
-     * Returns image.
+     * Returns image.(view)
      */
     public ImageView getImage() {
         return image;

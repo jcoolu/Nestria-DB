@@ -3,10 +3,7 @@ package application;
 import javafx.scene.image.ImageView;
 
 /**
- * Write a description of class Creature here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Creature class. (includes all creatures: dragon, troll, skeleton, wolf)
  */
 public class Creature
 {
@@ -28,7 +25,26 @@ public class Creature
     private String wolfSpecies;
     private ImageView image;
     
-    
+    /*
+     * Constructor for objects of class Creature.
+     * i - id
+     * n - name
+     * h - health 
+     * b - behavior
+     * a - attack
+     * d - defense
+     * s - size
+     * ha - habitat
+     * dc - dragon color
+     * ds - dragon species
+     * wing - wingspan
+     * w - weapon
+     * tc - troll color
+     * ts - troll species
+     * wc - wolf color
+     * es - wolf species
+     * im - image (view)
+     */
     public Creature(int i, String n, int h, String b, int a, int d, String s, String ha, 
     String dc, String ds, String wing, String w, String tc, String ts, String wc, String ws, ImageView im )
     {
@@ -51,70 +67,121 @@ public class Creature
         image = im;
     }
 
+    /*
+     * Returns id.
+     */
     public int getId() {
         return id;
     }
     
+    /*
+     * Returns name.
+     */
     public String getName() {
         return name;
     }
     
+    /*
+     * Returns health.
+     */
     public int getHealth() {
         return health;
     }
     
+    /*
+     * Returns behavior.
+     */
     public String getBehavior() {
         return behavior;
     }
     
+    /*
+     * Returns attack.
+     */
     public int getAttack() {
         return attack;
     }
     
+    /*
+     * Returns defense.
+     */
     public int getDefense() {
         return defense;
     }
     
+    /*
+     * Returns size.
+     */
     public String getSize() {
         return size;
     }
     
+    /*
+     * Returns habitat.
+     */
     public String getHabitat() {
         return habitat;
     }
     
+    /*
+     * Returns dragon color.
+     */
     public String getDragonColor() {
         return dragonColor;
     }
     
+    /*
+     * Returns dragon species.
+     */
     public String getDragonSpecies() {
         return dragonSpecies;
     }
     
+    /*
+     * Returns wingspan.
+     */
     public String getWingspan() {
         return wingspan;
     }
     
+    /*
+     * Returns weapon.
+     */
     public String getWeapon() {
         return weapon;
     }
     
+    /*
+     * Returns troll color.
+     */
     public String getTrollColor() {
         return trollColor;
     }
     
+    /*
+     * Returns troll species.
+     */
     public String getTrollSpecies() {
         return trollSpecies;
     }
     
+    /*
+     * Returns wolf color.
+     */
     public String getWolfColor() {
         return wolfColor;
     }
     
+    /*
+     * Returns wolf species.
+     */
     public String getWolfSpecies() {
         return wolfSpecies;
     }
     
+    /*
+     * Returns image. (view)
+     */
     public ImageView getImage() {
         return image;
     }

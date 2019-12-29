@@ -3,10 +3,7 @@ package application;
 import javafx.scene.image.ImageView;
 
 /**
- * Write a description of class Player here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Player class. (includes all Knights and Vikings)
  */
 public class Player
 {
@@ -25,6 +22,17 @@ public class Player
 
     /**
      * Constructor for objects of class Player
+     * i - id
+     * n - name
+     * h - health 
+     * a - attack
+     * d - defense 
+     * w - weapon
+     * s - shield
+     * g - goal
+     * k - kingdom
+     * t - tribe
+     * im - image (view)
      */
     public Player(int i, String n, int h, int a, int d, String w, String s, String g, String k, String t, ImageView im)
     {
@@ -41,46 +49,79 @@ public class Player
         image = im;
     }
 
+    /*
+     * Returns id.
+     */
     public int getId() {
         return id;
     }
 
+    /*
+     * Returns name.
+     */
     public String getName() {
         return name;
     }
 
+    /*
+     * Returns health.
+     */
     public int getHealth() {
         return health;
     }
 
+    /*
+     * Returns attack.
+     */
     public int getAttack() {
         return attack;
     }
 
+    /*
+     * Returns defense.
+     */
     public int getDefense() {
         return defense;
     }
 
+    /*
+     * Returns weapon.
+     */
     public String getWeapon() {
         return weapon;
     }
 
+    /*
+     * Returns shield.
+     */
     public String getShield() {
         return shield;
     }
 
+    /*
+     * Returns goal.
+     */
     public String getGoal() {
         return goal;
     }
 
+    /*
+     * Returns kingdom.
+     */
     public String getKingdom() {
         return kingdom;
     }
 
+    /*
+     * Returns tribe.
+     */
     public String getTribe() {
         return tribe;
     }
 
+    /*
+     * Returns image. (view)
+     */
     public ImageView getImage() {
         return image;
     }

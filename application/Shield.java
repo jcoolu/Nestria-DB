@@ -1,23 +1,9 @@
 package application;
 
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javafx.scene.control.TextField;
-import javafx.fxml.FXML;
-import java.util.*;
-import javafx.scene.control.TableView;
-import javafx.collections.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * Write a description of class Weapon here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Shield class. A shield has an id, name, defense, and image (view).
  */
 public class Shield
 {
@@ -26,29 +12,45 @@ public class Shield
     private int defense;
     private ImageView image;
 
-    /**
-     * Constructor for objects of class Weapon
+    /*
+     * Constructor for objects of class Shield.
+     * i - id
+     * n - name
+     * d - defense
+     * im - image (view)
      */
-    public Shield(int i, String n, int a, ImageView im)
+    public Shield(int i, String n, int d, ImageView im)
     {
         id = i;
         name = n;
-        defense = a;
+        defense = d;
         image = im;
     }
 
+    /*
+     * Returns id.
+     */
     public int getId() {
         return id;
     }
 
+    /*
+     * Returns name.
+     */
     public String getName() {
         return name;
     }
 
+    /*
+     * Returns defense.
+     */
     public int getDefense() {
         return defense;
     }
 
+    /*
+     * Returns image. (view)
+     */
     public ImageView getImage() {
         return image;
     }
