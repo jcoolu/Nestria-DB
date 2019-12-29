@@ -1,6 +1,5 @@
 package application; 
 
-import javafx.scene.control.TextInputControl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
@@ -12,17 +11,18 @@ import java.util.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import javafx.scene.control.ComboBox;
-import javafx.collections.*;
 import java.net.URL;
 import javafx.fxml.Initializable;
 
+/**
+ * Controller for ViewInfo.fxml. User can view options that chooses what items/characters they want to view
+ * in the DB.
+ */
 public class ViewInfoController implements Initializable{
 
     @FXML private ImageView image;
+    private NestriaDB db = new NestriaDB();
 
     /**
      * When AddKnightController is called
@@ -72,7 +72,7 @@ public class ViewInfoController implements Initializable{
         window.show();
     }
 
-    public void goToMainMenu(ActionEvent event) throws IOException, SQLException {
+    public void goToMainMenu(ActionEvent event) throws IOException {
         AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();

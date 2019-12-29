@@ -1,16 +1,13 @@
 package application; 
 
-import javafx.scene.control.TextInputControl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import java.util.*;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,7 +27,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ViewCreatureController implements Initializable{
+/**
+ * Controller for viewing all creatures in a table. 
+ */
+public class ViewCreatureController extends MainMenuController implements Initializable{
 
     @FXML private TableView<Creature> creatures = new TableView<>();
     @FXML private TableColumn<Creature,Integer> idColumn;
@@ -51,10 +51,8 @@ public class ViewCreatureController implements Initializable{
     @FXML private TableColumn<Creature, String> wolfSpeciesColumn;
     @FXML private TableColumn<Creature, ImageView> imageColumn;
 
-    NestriaDB db = new NestriaDB();
-
     /**
-     * When AddVikingController is called
+     * Setup for ViewCreature.fxml. Sets columns and rows for creature table.
      */
     public void initialize(URL url, ResourceBundle rb) {
         idColumn.setCellValueFactory(new PropertyValueFactory<Creature, Integer>("id"));
@@ -77,15 +75,10 @@ public class ViewCreatureController implements Initializable{
         creatures.setItems(db.viewCreatures());
     }
 
+    /**
+     * Return creature table.
+     */
     public TableView getCreatureTable() {
         return creatures;
-    }
-
-    public void goToViewInfo(ActionEvent event) throws IOException, SQLException {
-        AnchorPane tableViewParent = FXMLLoader.load(getClass().getResource("ViewInfo.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
-        window.setScene(tableViewScene);
-        window.show();
     }
 }
