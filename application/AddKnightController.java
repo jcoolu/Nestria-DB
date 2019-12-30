@@ -30,6 +30,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.stage.FileChooser;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 
 /**
  * Controller for AddKnight.fxml. User can add a Knight to the DB (id HAS to be unique)
@@ -55,6 +60,10 @@ public class AddKnightController extends MainMenuController implements Initializ
     @FXML private TextField statusText;
     @FXML private Button chooseImage;
     @FXML private TextField imageURL;
+    @FXML private TableView<Player> ids = new TableView<Player>();
+    @FXML private TableColumn<Player, Integer> idColumn;
+    @FXML private TextField searchId;
+
     private FileChooser fileChooser;
     private File file;
 
@@ -75,7 +84,7 @@ public class AddKnightController extends MainMenuController implements Initializ
         Goal.getItems().addAll(goals);
         statusText.setText("");
         Goal.getSelectionModel().select(goals.get(0));
-        
+
         // for choose image button
         chooseImage.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
@@ -93,6 +102,35 @@ public class AddKnightController extends MainMenuController implements Initializ
                     imageURL.setText(file.toString()); //shows file path in textfield
                 }
             });
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<Player, Integer>("id"));
+        ids.setItems(db.viewPlayers());
+        FilteredList<Player> filteredData = new FilteredList<>(db.viewPlayers(), p -> true);
+
+        searchId.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(player -> {
+                        // If filter text is empty, display all ids.
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+
+                        // Compare id
+                        String lowerCaseFilter = newValue.toLowerCase();
+
+                        if (Integer.toString(player.getId()).contains(lowerCaseFilter)) {
+                            return true; // Filter matches id
+                        } 
+                        return false; // Does not match.
+                    });
+            });        
+            // 3. Wrap the FilteredList in a SortedList. 
+        SortedList<Player> sortedData = new SortedList<>(filteredData);
+        
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(ids.comparatorProperty());
+        
+        // 5. Add sorted (and filtered) data to the table.
+        ids.setItems(sortedData);
     }
 
     /*
@@ -114,7 +152,7 @@ public class AddKnightController extends MainMenuController implements Initializ
         int weaponNum = KnightWeapon.getSelectionModel().getSelectedIndex() + 1;
         int kingdomNum = KnightKingdom.getSelectionModel().getSelectedIndex() + 1;
         int goalNum = Goal.getSelectionModel().getSelectedIndex() + 1;
-      
+
         byte[] fileContent;
         // initialize a byte array of size of the file
         if(file == null) {
@@ -142,7 +180,7 @@ public class AddKnightController extends MainMenuController implements Initializ
                 }
             }
         }
-        
+
         boolean result = db.addKnight(KnightId, KnightName, KnightAttack, KnightDefense, KnightHealth, weaponNum, shieldNum, kingdomNum, goalNum, fileContent);
         if(result == true) {
             try{ 

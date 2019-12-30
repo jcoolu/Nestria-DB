@@ -13,27 +13,47 @@
   <!-- TODO Add Nodes -->
   <children>
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0083cc" height="736.0" layoutX="0.0" layoutY="1.0" opacity="1.0" stroke="WHITE" strokeType="INSIDE" width="1280.0" />
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="303.0" layoutX="43.0" layoutY="91.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="918.0" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="358.0000915527344" layoutX="28.0" layoutY="91.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="1220.046630859375" />
     <Button id="AddKnightButton" layoutX="908.0" layoutY="612.0" mnemonicParsing="false" onAction="#addKnight" prefHeight="58.0" prefWidth="256.0" text="Add Knight">
       <font>
         <Font size="20.0" />
       </font>
     </Button>
-    <Text layoutX="53.0" layoutY="122.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="ID: " />
+    <Text layoutX="44.0" layoutY="128.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="ID: " />
     <Button fx:id="GoBack" layoutX="28.0" layoutY="29.0" mnemonicParsing="false" onAction="#goToAddPlayer" prefHeight="29.0" prefWidth="124.0" text="Go Back" />
-    <Text layoutX="58.0" layoutY="180.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
-    <Text layoutX="56.0" layoutY="242.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Attack:" />
-    <Text layoutX="60.0" layoutY="301.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Defense:" />
-    <Text layoutX="59.0" layoutY="369.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Health:" />
-    <Text layoutX="619.0" layoutY="128.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Weapon:" />
-    <Text layoutX="617.0" layoutY="180.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Shield:" />
-    <Text layoutX="620.0" layoutY="242.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Kingdom:" />
-    <TextField id="Id" fx:id="KnightId" layoutX="133.0" layoutY="103.0" prefHeight="29.0" prefWidth="388.0" />
-    <TextField id="Name" fx:id="KnightName" layoutX="133.0" layoutY="154.0" prefHeight="29.0" prefWidth="388.0" />
-    <TextField id="Attack" fx:id="KnightAttack" layoutX="133.0" layoutY="222.0" prefHeight="29.0" prefWidth="388.0" />
-    <TextField id="Defense" fx:id="KnightDefense" layoutX="133.0" layoutY="281.0" prefHeight="29.0" prefWidth="388.0" />
-    <TextField id="Health" fx:id="KnightHealth" layoutX="133.0" layoutY="346.0" prefHeight="29.0" prefWidth="388.0" />
-    <ComboBox id="Weapon" fx:id="KnightWeapon" layoutX="726.0" layoutY="109.0" prefHeight="28.0" prefWidth="221.0">
+    <Text layoutX="49.0" layoutY="186.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+    <Text layoutX="48.0" layoutY="248.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Attack:" />
+    <Text layoutX="51.0" layoutY="307.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Defense:" />
+    <Text layoutX="50.0" layoutY="375.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Health:" />
+    <Text layoutX="611.0" layoutY="134.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Weapon:" />
+    <Text layoutX="609.0" layoutY="186.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Shield:" />
+    <Text layoutX="612.0" layoutY="248.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Kingdom:" />
+    <TextField id="Id" fx:id="KnightId" layoutX="125.0" layoutY="109.0" prefHeight="29.0" prefWidth="388.0">
+      <tooltip>
+        <Tooltip text="Knight's Unique Id (Has to be Integer)" />
+      </tooltip>
+    </TextField>
+    <TextField id="Name" fx:id="KnightName" layoutX="125.0" layoutY="160.0" prefHeight="29.0" prefWidth="388.0">
+      <tooltip>
+        <Tooltip text="Knight's Name" />
+      </tooltip>
+    </TextField>
+    <TextField id="Attack" fx:id="KnightAttack" layoutX="125.0" layoutY="228.0" prefHeight="29.0" prefWidth="388.0">
+      <tooltip>
+        <Tooltip text="Knight's Attack (Has to be Integer)" />
+      </tooltip>
+    </TextField>
+    <TextField id="Defense" fx:id="KnightDefense" layoutX="125.0" layoutY="287.0" prefHeight="29.0" prefWidth="388.0">
+      <tooltip>
+        <Tooltip text="Knight's Defense (Has to be Integer)" />
+      </tooltip>
+    </TextField>
+    <TextField id="Health" fx:id="KnightHealth" layoutX="125.0" layoutY="352.0" prefHeight="29.0" prefWidth="388.0">
+      <tooltip>
+        <Tooltip text="Knight's Health (Has to be Integer)" />
+      </tooltip>
+    </TextField>
+    <ComboBox id="Weapon" fx:id="KnightWeapon" layoutX="718.0" layoutY="115.0" prefHeight="28.0" prefWidth="221.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -42,7 +62,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <ComboBox id="Shield" fx:id="KnightShield" layoutX="726.0" layoutY="161.0" prefHeight="28.0" prefWidth="221.0">
+    <ComboBox id="Shield" fx:id="KnightShield" layoutX="718.0" layoutY="167.0" prefHeight="28.0" prefWidth="221.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -51,7 +71,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <ComboBox id="Kingdom" fx:id="KnightKingdom" layoutX="726.0" layoutY="223.0" prefHeight="28.0" prefWidth="221.0">
+    <ComboBox id="Kingdom" fx:id="KnightKingdom" layoutX="718.0" layoutY="229.0" prefHeight="28.0" prefWidth="221.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -62,7 +82,7 @@
     </ComboBox>
     <TextField id="StatusText" fx:id="statusText" editable="false" layoutX="73.0" layoutY="552.0" prefHeight="97.0" prefWidth="356.0" text="" />
     <ImageView fx:id="Status" fitHeight="200.0" fitWidth="200.0" layoutX="490.0" layoutY="449.0" pickOnBounds="true" preserveRatio="true" />
-    <ComboBox id="Kingdom" fx:id="Goal" layoutX="726.0" layoutY="281.0" prefHeight="28.0" prefWidth="221.0">
+    <ComboBox id="Kingdom" fx:id="Goal" layoutX="718.0" layoutY="287.0" prefHeight="28.0" prefWidth="221.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -71,9 +91,18 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <Text layoutX="616.0" layoutY="296.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Goal:" />
-    <Text layoutX="617.0" layoutY="352.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Image:" />
-    <Button fx:id="chooseImage" layoutX="841.0" layoutY="333.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="109.0" text="Choose Image" />
-    <TextField id="Health" fx:id="imageURL" editable="false" layoutX="665.0" layoutY="335.0" prefHeight="29.0" prefWidth="162.0" />
+    <Text layoutX="608.0" layoutY="302.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Goal:" />
+    <Text layoutX="609.0" layoutY="358.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Image:" />
+    <Button fx:id="chooseImage" layoutX="833.0" layoutY="339.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="109.0" text="Choose Image" />
+    <TextField id="Health" fx:id="imageURL" editable="false" layoutX="657.0" layoutY="341.0" prefHeight="29.0" prefWidth="162.0" />
+    <Text layoutX="84.0" layoutY="532.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:" />
+    <TableView fx:id="ids" layoutX="1002.0" layoutY="123.0" prefHeight="247.0" prefWidth="221.0">
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="219.0" text="Id" fx:id="idColumn" />
+      </columns>
+    </TableView>
+    <Text layoutX="1014.0" layoutY="110.0" scaleX="1.7301927853282029" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Used Ids:" />
+    <TextField id="Health" fx:id="searchId" editable="true" layoutX="1047.0" layoutY="398.0" prefHeight="29.0" prefWidth="176.0" />
+    <Text layoutX="986.0" layoutY="421.0" scaleX="1.6190844473079553" scaleY="1.2751188282099823" strokeType="OUTSIDE" strokeWidth="0.0" text="Search:" />
   </children>
 </AnchorPane>
