@@ -352,7 +352,7 @@ public class NestriaDB {
     /**
      * Used in AddViking. Adds a Viking to DB. Returns true or false.
      */
-    public boolean addViking(TextField id, TextField name, TextField attack, TextField defense, TextField health, int weapon, int shield, int tribe, int goal) {
+    public boolean addViking(TextField id, TextField name, TextField attack, TextField defense, TextField health, int weapon, int shield, int tribe, int goal, byte[] fl) {
         PreparedStatement stmt = null;
         ResultSet rset = null;
         String sql, nameTxt, attackTxt, defenseTxt, healthTxt;
@@ -388,8 +388,38 @@ public class NestriaDB {
             stmt.setInt(1, vikingId);
             stmt.setInt(2, tribe);
 
+            stmt.executeUpdate();
             stmt.close();
             conn.commit();
+            
+            sql = "INSERT INTO Picture(ImageFile) VALUES (?);";
+            stmt = conn.prepareStatement(sql);
+            stmt.setBytes(1, fl);
+
+            // Execute the update
+            stmt.executeUpdate();
+            stmt.close();
+            conn.commit();
+
+            sql = "SELECT Id FROM Picture WHERE Id = (SELECT MAX(Id) FROM Picture);";
+            stmt = conn.prepareStatement(sql);
+            rset = stmt.executeQuery();
+
+            int picId = rset.getInt(1);
+            stmt.close();
+            rset.close();
+            conn.commit();
+
+            sql = "INSERT INTO PlayerPics(Picture, Player) VALUES (?,?);";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, picId);
+            stmt.setInt(2, vikingId);
+
+            stmt.executeUpdate();
+            stmt.close();
+            rset.close();
+            conn.commit();
+            
             result = true;
 
         } catch (Exception e) {

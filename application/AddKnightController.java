@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import java.util.*;
-import javafx.scene.text.Text;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import javafx.scene.image.ImageView;
@@ -46,17 +45,16 @@ public class AddKnightController extends MainMenuController implements Initializ
     ObservableList<String> kingdoms = db.getKingdomsForCombo();
     ObservableList<String> goals = db.getGoalsForCombo();
 
-    @FXML private TextField KnightId;
-    @FXML private TextField KnightName;
-    @FXML private TextField KnightAttack;
-    @FXML private TextField KnightHealth;
-    @FXML private TextField KnightDefense;
-    @FXML private ComboBox KnightWeapon = new ComboBox(options);
-    @FXML private ComboBox KnightShield = new ComboBox(shields);
-    @FXML private ComboBox KnightKingdom = new ComboBox(kingdoms);
-    @FXML private ComboBox Goal = new ComboBox(goals);
-    @FXML private ImageView BackgroundPic;
-    @FXML private ImageView Status;
+    @FXML private TextField knightId;
+    @FXML private TextField knightName;
+    @FXML private TextField knightAttack;
+    @FXML private TextField knightHealth;
+    @FXML private TextField knightDefense;
+    @FXML private ComboBox knightWeapon = new ComboBox(options);
+    @FXML private ComboBox knightShield = new ComboBox(shields);
+    @FXML private ComboBox knightKingdom = new ComboBox(kingdoms);
+    @FXML private ComboBox goal= new ComboBox(goals);
+    @FXML private ImageView status;
     @FXML private TextField statusText;
     @FXML private Button chooseImage;
     @FXML private TextField imageURL;
@@ -71,19 +69,19 @@ public class AddKnightController extends MainMenuController implements Initializ
      * When AddKnightController is called
      */
     public void initialize(URL url, ResourceBundle rb) {
-        KnightWeapon.getItems().removeAll(KnightWeapon.getItems());
-        KnightWeapon.getItems().addAll(options);
-        KnightWeapon.getSelectionModel().select(options.get(0));
-        KnightShield.getItems().removeAll(KnightShield.getItems());
-        KnightShield.getItems().addAll(shields);
-        KnightShield.getSelectionModel().select(shields.get(0));
-        KnightKingdom.getItems().removeAll(KnightKingdom.getItems());
-        KnightKingdom.getItems().addAll(kingdoms);
-        KnightKingdom.getSelectionModel().select(kingdoms.get(0));
-        Goal.getItems().removeAll(Goal.getItems());
-        Goal.getItems().addAll(goals);
+        knightWeapon.getItems().removeAll(knightWeapon.getItems());
+        knightWeapon.getItems().addAll(options);
+        knightWeapon.getSelectionModel().select(options.get(1));
+        knightShield.getItems().removeAll(knightShield.getItems());
+        knightShield.getItems().addAll(shields);
+        knightShield.getSelectionModel().select(shields.get(1));
+        knightKingdom.getItems().removeAll(knightKingdom.getItems());
+        knightKingdom.getItems().addAll(kingdoms);
+        knightKingdom.getSelectionModel().select(kingdoms.get(1));
+        goal.getItems().removeAll(goal.getItems());
+        goal.getItems().addAll(goals);
         statusText.setText("");
-        Goal.getSelectionModel().select(goals.get(0));
+        goal.getSelectionModel().select(goals.get(0));
 
         // for choose image button
         chooseImage.setOnAction(new EventHandler<ActionEvent>(){
@@ -137,21 +135,21 @@ public class AddKnightController extends MainMenuController implements Initializ
      * Clears textfields.
      */
     public void setUpText() {
-        KnightId.setText("");
-        KnightName.setText("");
-        KnightAttack.setText("");
-        KnightHealth.setText("");
-        KnightDefense.setText("");
+        knightId.setText("");
+        knightName.setText("");
+        knightAttack.setText("");
+        knightHealth.setText("");
+        knightDefense.setText("");
     }
 
     /*
      * Adds a Knight to DB.
      */
     public void addKnight() {
-        int shieldNum = KnightShield.getSelectionModel().getSelectedIndex() + 1;
-        int weaponNum = KnightWeapon.getSelectionModel().getSelectedIndex() + 1;
-        int kingdomNum = KnightKingdom.getSelectionModel().getSelectedIndex() + 1;
-        int goalNum = Goal.getSelectionModel().getSelectedIndex() + 1;
+        int shieldNum = knightShield.getSelectionModel().getSelectedIndex() + 1;
+        int weaponNum = knightWeapon.getSelectionModel().getSelectedIndex() + 1;
+        int kingdomNum = knightKingdom.getSelectionModel().getSelectedIndex() + 1;
+        int goalNum = goal.getSelectionModel().getSelectedIndex() + 1;
 
         byte[] fileContent;
         // initialize a byte array of size of the file
@@ -181,14 +179,14 @@ public class AddKnightController extends MainMenuController implements Initializ
             }
         }
 
-        boolean result = db.addKnight(KnightId, KnightName, KnightAttack, KnightDefense, KnightHealth, weaponNum, shieldNum, kingdomNum, goalNum, fileContent);
+        boolean result = db.addKnight(knightId, knightName, knightAttack, knightDefense, knightHealth, weaponNum, shieldNum, kingdomNum, goalNum, fileContent);
         if(result == true) {
             try{ 
                 byte[] array = db.getPicture(77);
                 ByteArrayInputStream bis = new ByteArrayInputStream(array);
                 BufferedImage b = ImageIO.read(bis);
                 Image im = SwingFXUtils.toFXImage(b,null);
-                Status.setImage(im);
+                status.setImage(im);
                 statusText.setText("Added Knight Successfully");
                 setUpText(); //clears fields  
             }
@@ -202,7 +200,7 @@ public class AddKnightController extends MainMenuController implements Initializ
                 ByteArrayInputStream bis = new ByteArrayInputStream(array);
                 BufferedImage b = ImageIO.read(bis);
                 Image im = SwingFXUtils.toFXImage(b,null);
-                Status.setImage(im);
+                status.setImage(im);
                 statusText.setText("Error: Did not add Knight Successfully. " +
                     "Check to make sure id is unique AND/OR id, attack, defense, and health are integers.");
                 setUpText(); //clears fields  

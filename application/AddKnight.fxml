@@ -28,32 +28,32 @@
     <Text layoutX="611.0" layoutY="134.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Weapon:" />
     <Text layoutX="609.0" layoutY="186.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Shield:" />
     <Text layoutX="612.0" layoutY="248.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Kingdom:" />
-    <TextField id="Id" fx:id="KnightId" layoutX="125.0" layoutY="109.0" prefHeight="29.0" prefWidth="388.0">
+    <TextField id="Id" fx:id="knightId" layoutX="125.0" layoutY="109.0" prefHeight="29.0" prefWidth="388.0">
       <tooltip>
         <Tooltip text="Knight's Unique Id (Has to be Integer)" />
       </tooltip>
     </TextField>
-    <TextField id="Name" fx:id="KnightName" layoutX="125.0" layoutY="160.0" prefHeight="29.0" prefWidth="388.0">
+    <TextField id="Name" fx:id="knightName" layoutX="125.0" layoutY="160.0" prefHeight="29.0" prefWidth="388.0">
       <tooltip>
         <Tooltip text="Knight's Name" />
       </tooltip>
     </TextField>
-    <TextField id="Attack" fx:id="KnightAttack" layoutX="125.0" layoutY="228.0" prefHeight="29.0" prefWidth="388.0">
+    <TextField id="Attack" fx:id="knightAttack" layoutX="125.0" layoutY="228.0" prefHeight="29.0" prefWidth="388.0">
       <tooltip>
         <Tooltip text="Knight's Attack (Has to be Integer)" />
       </tooltip>
     </TextField>
-    <TextField id="Defense" fx:id="KnightDefense" layoutX="125.0" layoutY="287.0" prefHeight="29.0" prefWidth="388.0">
+    <TextField id="Defense" fx:id="knightDefense" layoutX="125.0" layoutY="287.0" prefHeight="29.0" prefWidth="388.0">
       <tooltip>
         <Tooltip text="Knight's Defense (Has to be Integer)" />
       </tooltip>
     </TextField>
-    <TextField id="Health" fx:id="KnightHealth" layoutX="125.0" layoutY="352.0" prefHeight="29.0" prefWidth="388.0">
+    <TextField id="Health" fx:id="knightHealth" layoutX="125.0" layoutY="352.0" prefHeight="29.0" prefWidth="388.0">
       <tooltip>
         <Tooltip text="Knight's Health (Has to be Integer)" />
       </tooltip>
     </TextField>
-    <ComboBox id="Weapon" fx:id="KnightWeapon" layoutX="718.0" layoutY="115.0" prefHeight="28.0" prefWidth="221.0">
+    <ComboBox id="Weapon" fx:id="knightWeapon" layoutX="718.0" layoutY="115.0" prefHeight="28.0" prefWidth="221.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -62,7 +62,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <ComboBox id="Shield" fx:id="KnightShield" layoutX="718.0" layoutY="167.0" prefHeight="28.0" prefWidth="221.0">
+    <ComboBox id="Shield" fx:id="knightShield" layoutX="718.0" layoutY="167.0" prefHeight="28.0" prefWidth="221.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -71,7 +71,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <ComboBox id="Kingdom" fx:id="KnightKingdom" layoutX="718.0" layoutY="229.0" prefHeight="28.0" prefWidth="221.0">
+    <ComboBox id="Kingdom" fx:id="knightKingdom" layoutX="718.0" layoutY="229.0" prefHeight="28.0" prefWidth="221.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -81,8 +81,8 @@
       </items>
     </ComboBox>
     <TextField id="StatusText" fx:id="statusText" editable="false" layoutX="73.0" layoutY="552.0" prefHeight="97.0" prefWidth="356.0" text="" />
-    <ImageView fx:id="Status" fitHeight="200.0" fitWidth="200.0" layoutX="490.0" layoutY="449.0" pickOnBounds="true" preserveRatio="true" />
-    <ComboBox id="Kingdom" fx:id="Goal" layoutX="718.0" layoutY="287.0" prefHeight="28.0" prefWidth="221.0">
+    <ImageView id="Status" fx:id="status" fitHeight="200.0" fitWidth="200.0" layoutX="490.0" layoutY="449.0" pickOnBounds="true" preserveRatio="true" />
+    <ComboBox id="Kingdom" fx:id="goal" layoutX="718.0" layoutY="287.0" prefHeight="28.0" prefWidth="221.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -94,7 +94,7 @@
     <Text layoutX="608.0" layoutY="302.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Goal:" />
     <Text layoutX="609.0" layoutY="358.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Image:" />
     <Button fx:id="chooseImage" layoutX="833.0" layoutY="339.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="109.0" text="Choose Image" />
-    <TextField id="Health" fx:id="imageURL" editable="false" layoutX="657.0" layoutY="341.0" prefHeight="29.0" prefWidth="162.0" />
+    <TextField id="Health" fx:id="imageURL" editable="false" layoutX="657.0" layoutY="342.0" prefHeight="29.0" prefWidth="162.0" />
     <Text layoutX="84.0" layoutY="532.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:" />
     <TableView fx:id="ids" layoutX="1002.0" layoutY="123.0" prefHeight="247.0" prefWidth="221.0">
       <columns>

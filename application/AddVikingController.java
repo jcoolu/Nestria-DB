@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import java.util.*;
-import javafx.scene.text.Text;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import javafx.scene.image.ImageView;
@@ -20,245 +19,175 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javafx.scene.control.ComboBox;
 import javafx.collections.*;
-import javafx.scene.control.TextInputControl;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.scene.control.TextField;
-import javafx.fxml.FXML;
-import java.util.*;
-import javafx.scene.text.Text;
-import javafx.fxml.Initializable;
-import java.net.URL;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
-import java.io.IOException;
 import java.io.*;
 import java.io.ByteArrayOutputStream;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.stage.FileChooser;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 
 /**
  * Controller for AddViking.fxml. User can add a Viking to the DB (id HAS to be unique)
  */
 public class AddVikingController  extends MainMenuController implements Initializable{
-    private ObservableList<String> options = FXCollections.observableArrayList("Destroyer", "Steel Death",
-            "Spikes", "Burn Baby Burn", "Skyward Sword", "Dagger", "Bass Booster", "Katana", "Dragon Sword",
-            "Flicker");
-
-    private ObservableList<String> shields = FXCollections.observableArrayList("Destiny", "Norton Shield",
-            "Protector", "Unknown", "Bubble Power", "Worthless", "Boneyard Shield", "Grassland", "I Like Turtles",
-            "MalwareBytes");
-
-    private ObservableList<String> tribes = FXCollections.observableArrayList("Scaulding", "Gharnia",
-            "Vexos", "The Companions", "Flarnians", "Wyverns", "The Vikislyn", "The Dragonians", "Cyase",
-            "Skylanders");
-
-    private ObservableList<String> goals = FXCollections.observableArrayList("Defeat Scaulding", "Defeat Vexos",
-            "Defeat Wyverns", "Defeat Templars of the Forest", "Defeat Skylanders", "Defeat three dragons", "Defeat ten skeletons", 
-            "Defeat five trolls", "Defeat eight wolves",
-            "Defeat Hackers");
-
-    @FXML private TextField VikingId;
-    @FXML private TextField VikingName;
-    @FXML private TextField VikingAttack;
-    @FXML private TextField VikingHealth;
-    @FXML private TextField VikingDefense;
-    @FXML private ComboBox VikingWeapon = new ComboBox(options);
-    @FXML private ComboBox VikingShield = new ComboBox(shields);
-    @FXML private ComboBox VikingTribe = new ComboBox(tribes);
-    @FXML private ComboBox Goal = new ComboBox(goals);
-    @FXML private ImageView BackgroundPic;
-    @FXML private ImageView Status;
-    @FXML private TextField StatusText;
     private NestriaDB db = new NestriaDB();
+    private ObservableList<String> options = db.getWeaponsForCombo();
+    private ObservableList<String> shields = db.getShieldsForCombo();
+    private ObservableList<String> tribes = db.getTribesForCombo();
+    private ObservableList<String> goals = db.getGoalsForCombo();
+
+    @FXML private TextField vikingId;
+    @FXML private TextField vikingName;
+    @FXML private TextField vikingAttack;
+    @FXML private TextField vikingHealth;
+    @FXML private TextField vikingDefense;
+    @FXML private ComboBox vikingWeapon = new ComboBox(options);
+    @FXML private ComboBox vikingShield = new ComboBox(shields);
+    @FXML private ComboBox vikingTribe = new ComboBox(tribes);
+    @FXML private ComboBox goal = new ComboBox(goals);
+    @FXML private ImageView status;
+    @FXML private TextField statusText;
+    @FXML private Button chooseImage;
+    @FXML private TextField imageURL;
+    @FXML private TableView<Player> ids = new TableView<Player>();
+    @FXML private TableColumn<Player, Integer> idColumn;
+    @FXML private TextField searchId;
+    
+    private FileChooser fileChooser;
+    private File file;
+
     /**
      * When AddVikingController is called
      */
     public void initialize(URL url, ResourceBundle rb) {
-        VikingWeapon.getItems().removeAll(VikingWeapon.getItems());
-        VikingWeapon.getItems().addAll(options);
-        VikingWeapon.getSelectionModel().select(options.get(0));
-        VikingShield.getItems().removeAll(VikingShield.getItems());
-        VikingShield.getItems().addAll(shields);
-        VikingShield.getSelectionModel().select(shields.get(0));
-        VikingTribe.getItems().removeAll(VikingTribe.getItems());
-        VikingTribe.getItems().addAll(tribes);
-        VikingTribe.getSelectionModel().select(tribes.get(0));
-        Goal.getItems().removeAll(Goal.getItems());
-        Goal.getItems().addAll(goals);
-        Goal.getSelectionModel().select(goals.get(0));
-        StatusText.setText("");
+        vikingWeapon.getItems().removeAll(vikingWeapon.getItems());
+        vikingWeapon.getItems().addAll(options);
+        vikingWeapon.getSelectionModel().select(options.get(0));
+        vikingWeapon.getItems().removeAll(vikingWeapon.getItems());
+        vikingWeapon.getItems().addAll(shields);
+        vikingWeapon.getSelectionModel().select(shields.get(0));
+        vikingTribe.getItems().removeAll(vikingTribe.getItems());
+        vikingTribe.getItems().addAll(tribes);
+        vikingTribe.getSelectionModel().select(tribes.get(0));
+        goal.getItems().removeAll(goal.getItems());
+        goal.getItems().addAll(goals);
+        goal.getSelectionModel().select(goals.get(0));
+        statusText.setText("");
+
+        // for choose image button
+        chooseImage.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    fileChooser = new FileChooser();
+                    fileChooser.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("All Images", "*.*"),
+                        new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                        new FileChooser.ExtensionFilter("GIF", "*.gif"),
+                        new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+                        new FileChooser.ExtensionFilter("PNG", "*.png")
+                    );
+                    Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
+                    file = fileChooser.showOpenDialog(window);
+                    imageURL.setText(file.toString()); //shows file path in textfield
+                }
+            });
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<Player, Integer>("id"));
+        ids.setItems(db.viewPlayers());
+        FilteredList<Player> filteredData = new FilteredList<>(db.viewPlayers(), p -> true);
+
+        searchId.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(player -> {
+                        // If filter text is empty, display all ids.
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+
+                        // Compare id
+                        String lowerCaseFilter = newValue.toLowerCase();
+
+                        if (Integer.toString(player.getId()).contains(lowerCaseFilter)) {
+                            return true; // Filter matches id
+                        } 
+                        return false; // Does not match.
+                    });
+            });        
+        // 3. Wrap the FilteredList in a SortedList. 
+        SortedList<Player> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(ids.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        ids.setItems(sortedData);
     }
 
     /*
      * Clears textfields. 
      */
     public void setUpText() {
-        VikingId.setText("");
-        VikingName.setText("");
-        VikingAttack.setText("");
-        VikingHealth.setText("");
-        VikingDefense.setText("");
+        vikingId.setText("");
+        vikingName.setText("");
+        vikingAttack.setText("");
+        vikingHealth.setText("");
+        vikingDefense.setText("");
     }
 
     /*
      * Adds a viking to the DB.
      */
     public void addViking() {
-        String getShield = VikingShield.getSelectionModel().getSelectedItem().toString();
-        int shieldNum=1;
-        switch(getShield) {
-            case "Destiny":
-            shieldNum = 1;
-            break;
-            case "Norton Shield":
-            shieldNum = 2;
-            break;
-            case "Protector":
-            shieldNum = 3;
-            break;
-            case "Unknown":
-            shieldNum = 4;
-            break;
-            case "Bubble Power":
-            shieldNum = 5;
-            break;
-            case "Worthless":
-            shieldNum = 6;
-            break;
-            case "Boneyard Shield":
-            shieldNum = 7;
-            break;
-            case "Grassland":
-            shieldNum = 8;
-            break;
-            case "I Like Turtles":
-            shieldNum = 9;
-            break;
-            case "MalwareBytes":
-            shieldNum = 10;
-            break;
+        int shieldNum = vikingShield.getSelectionModel().getSelectedIndex() + 1;
+        int weaponNum = vikingWeapon.getSelectionModel().getSelectedIndex() + 1;
+        int kingdomNum = vikingTribe.getSelectionModel().getSelectedIndex() + 1;
+        int goalNum = goal.getSelectionModel().getSelectedIndex() + 1;
+
+        byte[] fileContent;
+        // initialize a byte array of size of the file
+        if(file == null) {
+            fileContent = null;
+        }
+        else {
+            fileContent = new byte[(int) file.length()];
+            FileInputStream inputStream = null;
+            try {
+                // create an input stream pointing to the file
+                inputStream = new FileInputStream(file);
+                // read the contents of file into byte array
+                inputStream.read(fileContent);
+            } catch (IOException e) {
+
+            } finally {
+                // close input stream
+                if (inputStream != null) {
+                    try{
+                        inputStream.close();
+                    }
+                    catch(Exception e) {
+
+                    }
+                }
+            }
         }
 
-        String getWeapon = VikingWeapon.getSelectionModel().getSelectedItem().toString();
-        int weaponNum=1;
-        switch(getWeapon) {
-            case "Destroyer":
-            weaponNum = 1;
-            break;
-            case "Steel Death":
-            weaponNum = 2;
-            break;
-            case "Spikes":
-            weaponNum = 3;
-            break;
-            case "Burn Baby Burn":
-            weaponNum = 4;
-            break;
-            case "Skyward Sword":
-            weaponNum = 5;
-            break;
-            case "Dagger":
-            weaponNum = 6;
-            break;
-            case "Bass Booster":
-            weaponNum = 7;
-            break;
-            case "Katana":
-            weaponNum = 8;
-            break;
-            case "Dragon Sword":
-            weaponNum = 9;
-            break;
-            case "Flicker":
-            weaponNum = 10;
-            break;
-        }
-
-        String getTribe = VikingTribe.getSelectionModel().getSelectedItem().toString();
-        int tribeNum=1;
-        switch(getTribe) {
-            case "Scaulding":
-            tribeNum = 1;
-            break;
-            case "Gharnia":
-            tribeNum = 2;
-            break;
-            case "Vexos":
-            tribeNum = 3;
-            break;
-            case "The Companions":
-            tribeNum = 4;
-            break;
-            case "Flarnians":
-            tribeNum = 5;
-            break;
-            case "Wyverns":
-            tribeNum = 6;
-            break;
-            case "The Vikislyn":
-            tribeNum = 7;
-            break;
-            case "The Dragonians":
-            tribeNum = 8;
-            break;
-            case "Cyase":
-            tribeNum = 9;
-            break;
-            case "Skylanders":
-            tribeNum = 10;
-            break;
-        }
-
-        String getGoal = Goal.getSelectionModel().getSelectedItem().toString();
-        int goalNum = 1;
-        switch(getGoal) {
-            case "Defeat Scaulding":
-            goalNum = 1;
-            break;
-            case "Defeat Vexos":
-            goalNum = 2;
-            break;
-            case "Defeat Wyverns":
-            goalNum = 3;
-            break;
-            case "Defeat Templars of the Forest":
-            goalNum = 4;
-            break;
-            case "Defeat Skylanders":
-            goalNum = 5;
-            break;
-            case "Defeat three dragons":
-            goalNum = 6;
-            break;
-            case "Defeat ten skeletons":
-            goalNum = 7;
-            break;
-            case "Defeat five trolls":
-            goalNum = 8;
-            break;
-            case "Defeat eight wolves":
-            goalNum = 9;
-            break;
-            case "Defeat Hackers":
-            goalNum = 10;
-            break;
-        }
-
-        boolean result = db.addViking(VikingId, VikingName, VikingAttack, VikingDefense, VikingHealth, weaponNum, shieldNum, tribeNum, goalNum);
+        boolean result = db.addViking(vikingId, vikingName, vikingAttack, vikingDefense, vikingHealth, weaponNum, shieldNum, kingdomNum, goalNum, fileContent);
         if(result == true) {
             try{ 
                 byte[] array = db.getPicture(77);
                 ByteArrayInputStream bis = new ByteArrayInputStream(array);
                 BufferedImage b = ImageIO.read(bis);
                 Image im = SwingFXUtils.toFXImage(b,null);
-                Status.setImage(im);
-                StatusText.setText("Added Viking Successfully");
+                status.setImage(im);
+                statusText.setText("Added Viking Successfully");
                 setUpText(); //clears fields  
             }
             catch (Exception e){
@@ -271,8 +200,8 @@ public class AddVikingController  extends MainMenuController implements Initiali
                 ByteArrayInputStream bis = new ByteArrayInputStream(array);
                 BufferedImage b = ImageIO.read(bis);
                 Image im = SwingFXUtils.toFXImage(b,null);
-                Status.setImage(im);
-                StatusText.setText("Error: Did not add Viking Successfully. " +
+                status.setImage(im);
+                statusText.setText("Error: Did not add Viking Successfully. " +
                     "Check to make sure id is unique AND/OR id, attack, defense, and health are integers.");
                 setUpText(); //clears fields  
             }

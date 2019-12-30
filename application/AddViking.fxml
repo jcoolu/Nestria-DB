@@ -13,7 +13,7 @@
   <!-- TODO Add Nodes -->
   <children>
     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#66edff" height="742.0" layoutX="0.0" layoutY="0.0" opacity="1.0" stroke="WHITE" strokeType="INSIDE" width="1280.0" />
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="303.0" layoutX="72.0" layoutY="93.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="918.0" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="358.0000915527344" layoutX="37.0" layoutY="79.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="1220.046630859375" />
     <Button id="AddKnightButton" layoutX="952.0" layoutY="622.0" mnemonicParsing="false" onAction="#addViking" prefHeight="58.0" prefWidth="256.0" text="Add Viking">
       <font>
         <Font size="20.0" />
@@ -25,15 +25,15 @@
     <Text layoutX="106.0" layoutY="249.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Attack:" />
     <Text layoutX="112.0" layoutY="308.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Defense:" />
     <Text layoutX="109.0" layoutY="376.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Health:" />
-    <Text layoutX="672.0" layoutY="134.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Weapon:" />
-    <Text layoutX="670.0" layoutY="187.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Shield:" />
-    <Text layoutX="672.0" layoutY="249.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Tribe:" />
-    <TextField id="Id" fx:id="VikingId" layoutX="177.0" layoutY="113.0" prefHeight="29.0" prefWidth="388.0" />
-    <TextField id="Name" fx:id="VikingName" layoutX="177.0" layoutY="164.0" prefHeight="29.0" prefWidth="388.0" />
-    <TextField id="Attack" fx:id="VikingAttack" layoutX="177.0" layoutY="232.0" prefHeight="29.0" prefWidth="388.0" />
-    <TextField id="Defense" fx:id="VikingDefense" layoutX="177.0" layoutY="291.0" prefHeight="29.0" prefWidth="388.0" />
-    <TextField id="Health" fx:id="VikingHealth" layoutX="177.0" layoutY="356.0" prefHeight="29.0" prefWidth="388.0" />
-    <ComboBox id="Weapon" fx:id="VikingWeapon" layoutX="770.0" layoutY="119.0" prefHeight="27.07342529296875" prefWidth="196.0">
+    <Text layoutX="623.0" layoutY="139.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Weapon:" />
+    <Text layoutX="623.0" layoutY="196.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Shield:" />
+    <Text layoutX="624.0" layoutY="251.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Tribe:" />
+    <TextField id="Id" fx:id="vikingId" layoutX="177.0" layoutY="113.0" prefHeight="29.0" prefWidth="388.0" />
+    <TextField id="Name" fx:id="vikingName" layoutX="177.0" layoutY="164.0" prefHeight="29.0" prefWidth="388.0" />
+    <TextField id="Attack" fx:id="vikingAttack" layoutX="177.0" layoutY="232.0" prefHeight="29.0" prefWidth="388.0" />
+    <TextField id="Defense" fx:id="vikingDefense" layoutX="177.0" layoutY="291.0" prefHeight="29.0" prefWidth="388.0" />
+    <TextField id="Health" fx:id="vikingHealth" layoutX="177.0" layoutY="356.0" prefHeight="29.0" prefWidth="388.0" />
+    <ComboBox id="Weapon" fx:id="vikingWeapon" layoutX="707.0" layoutY="113.0" prefHeight="28.0" prefWidth="259.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -42,7 +42,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <ComboBox id="Shield" fx:id="VikingShield" layoutX="770.0" layoutY="171.0" prefHeight="27.07342529296875" prefWidth="196.0">
+    <ComboBox id="Shield" fx:id="vikingShield" layoutX="707.0" layoutY="171.0" prefHeight="28.0" prefWidth="259.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -51,7 +51,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <ComboBox id="Kingdom" fx:id="VikingTribe" layoutX="770.0" layoutY="233.0" prefHeight="27.07342529296875" prefWidth="196.0">
+    <ComboBox id="Kingdom" fx:id="vikingTribe" layoutX="707.0" layoutY="233.0" prefHeight="28.0" prefWidth="259.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -60,9 +60,9 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <TextField fx:id="StatusText" editable="false" layoutX="70.0" layoutY="574.0" prefHeight="97.0" prefWidth="356.0" text="" />
-    <ImageView fx:id="Status" fitHeight="200.0" fitWidth="200.0" layoutX="487.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true" />
-    <ComboBox id="Kingdom" fx:id="Goal" layoutX="767.0" layoutY="285.0" prefHeight="27.07342529296875" prefWidth="196.0">
+    <TextField id="StatusText" fx:id="statusText" editable="false" layoutX="70.0" layoutY="574.0" prefHeight="97.0" prefWidth="356.0" text="" />
+    <ImageView id="Status" fx:id="status" fitHeight="200.0" fitWidth="200.0" layoutX="487.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true" />
+    <ComboBox id="Kingdom" fx:id="goal" layoutX="707.0" layoutY="285.0" prefHeight="28.0" prefWidth="256.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -71,6 +71,17 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <Text layoutX="679.0" layoutY="308.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Goal:" />
+    <Text layoutX="627.0" layoutY="308.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Goal:" />
+    <Text layoutX="76.0" layoutY="549.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:" />
+    <Text layoutX="629.0" layoutY="362.0" scaleX="1.333681813578362" scaleY="1.6962300266771062" strokeType="OUTSIDE" strokeWidth="0.0" text="Image:" />
+    <TextField id="Health" fx:id="imageURL" editable="false" layoutX="686.0" layoutY="343.0" prefHeight="29.0" prefWidth="162.0" />
+    <Button fx:id="chooseImage" layoutX="857.0" layoutY="342.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="109.0" text="Choose Image" />
+    <TableView fx:id="ids" layoutX="1008.0" layoutY="124.0" prefHeight="247.0" prefWidth="221.0">
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="219.0" text="Id" fx:id="idColumn" />
+      </columns>
+    </TableView>
+    <Text layoutX="996.0" layoutY="413.0" scaleX="1.6190844473079553" scaleY="1.2751188282099823" strokeType="OUTSIDE" strokeWidth="0.0" text="Search:" />
+    <TextField id="Health" fx:id="searchId" editable="true" layoutX="1053.0" layoutY="389.0" prefHeight="29.0" prefWidth="176.0" />
   </children>
 </AnchorPane>
