@@ -25,7 +25,6 @@
             <Font size="20.0" />
           </font>
           <stylesheets>
-            <URL value="@application.css" />
           </stylesheets>
         </Button>
       </center>

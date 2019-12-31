@@ -37,8 +37,8 @@ public class Main extends Application {
             StackPane root = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
 
             Scene scene = new Scene(root,1280,720);
-            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-            File file = new File("application\\NestriaTitleScreen.mp4");   
+
+            File file = new File("application\\NestriaTitleScreen.mp4");
             String media = file.toURI().toString();
             Media musicFile = new Media(media);
             mediaPlayer = new MediaPlayer(musicFile);
