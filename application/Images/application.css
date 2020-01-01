@@ -1,9 +1,17 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
 .button { 
+
    -fx-background-image: url("arena.png"); 
+
    -fx-background-size: 630px 360px;
+
 }
 
+
+
 .text-area .content {
+
    -fx-background-image: url("scroll.png"); 
+
 }*/

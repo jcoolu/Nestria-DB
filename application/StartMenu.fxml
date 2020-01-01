@@ -17,15 +17,13 @@
     <Pane prefHeight="200.0" prefWidth="200.0" />
     <BorderPane prefHeight="600.0" prefWidth="800.0">
       <center>
-        <Button fx:id="StartGame" cancelButton="false" contentDisplay="CENTER" defaultButton="false" mnemonicParsing="false" onAction="#goToMainMenu" style="" text="Start Game" textAlignment="CENTER" textFill="#7200cc" textOverrun="CENTER_ELLIPSIS" BorderPane.alignment="CENTER">
+        <Button fx:id="StartGame" cancelButton="false" contentDisplay="CENTER" defaultButton="false" mnemonicParsing="false" onAction="#goToMainMenu" style="" text="Start Game" textAlignment="CENTER" textFill="#a533ff" textOverrun="CENTER_ELLIPSIS" BorderPane.alignment="CENTER">
           <effect>
-            <DropShadow color="#7433ff" height="124.35515873015875" radius="62.56299603174604" width="127.89682539682542" />
+            <DropShadow color="#7433ff" height="126.12599206349208" radius="63.005704365079374" width="127.89682539682542" />
           </effect>
           <font>
             <Font size="20.0" />
           </font>
-          <stylesheets>
-          </stylesheets>
         </Button>
       </center>
     </BorderPane>
