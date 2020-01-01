@@ -43,8 +43,13 @@ public class HealCreatureController extends MainMenuController implements Initia
      */
     public void heal() {
         Creature cr = db.healCreature(EnterCreatureId, HealBy);
-        CreatureName.setText(cr.getName());
-        CreatureId.setText(Integer.toString(cr.getId()));
-        CreatureHealth.setText(Integer.toString(cr.getHealth()));
+        if(cr == null) {
+
+        }
+        else{
+            CreatureName.setText(cr.getName());
+            CreatureId.setText(Integer.toString(cr.getId()));
+            CreatureHealth.setText(Integer.toString(cr.getHealth()));
+        }
     }
 }

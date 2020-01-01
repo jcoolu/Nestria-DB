@@ -223,14 +223,16 @@ public class NestriaDB {
         PreparedStatement stmt = null;  
         String sql;
         ResultSet rset = null;
-        Creature cr = getCreature(Integer.parseInt(enter.getText()));
-        int creaturehealth = cr.getHealth() + Integer.parseInt(heal.getText());
-        // Return if the database is closed.
+        Creature cr;
+        
         if (!isopen) {
             return null;
         }
-
+        
         try {
+            cr = getCreature(Integer.parseInt(enter.getText()));
+            int creaturehealth = cr.getHealth() + Integer.parseInt(heal.getText());
+            
             sql = "UPDATE Creature SET Health = ? WHERE Id = ?;";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1,creaturehealth); 
@@ -242,9 +244,11 @@ public class NestriaDB {
             stmt.close();
             conn.commit();
             try {stmt.close();}
-            catch (Exception err) {;}
+            catch (Exception err) {return null;}
             try {conn.rollback();}
-            catch (Exception err) {;}
+            catch (Exception err) {
+                return null;
+            }
 
             cr = getCreature(cr.getId());
 
@@ -254,14 +258,16 @@ public class NestriaDB {
                 conn.commit();
             }
             catch (Exception e) {
-
+                return null;
             }
         } catch (Exception e) {
             System.out.printf("%s%n", e.getMessage());
-
+            return null;
         }
         try {stmt.close();}
-        catch (Exception err) {}
+        catch (Exception err) {
+            return null;
+        }
         return cr;
     }
 
@@ -391,7 +397,7 @@ public class NestriaDB {
             stmt.executeUpdate();
             stmt.close();
             conn.commit();
-            
+
             sql = "INSERT INTO Picture(ImageFile) VALUES (?);";
             stmt = conn.prepareStatement(sql);
             stmt.setBytes(1, fl);
@@ -419,7 +425,7 @@ public class NestriaDB {
             stmt.close();
             rset.close();
             conn.commit();
-            
+
             result = true;
 
         } catch (Exception e) {
@@ -1131,7 +1137,7 @@ public class NestriaDB {
         }
         return image;
     }
-    
+
     public ObservableList<String> getWeaponsForCombo() {
         ObservableList<String> weapons = FXCollections.observableArrayList();
 
@@ -1167,7 +1173,7 @@ public class NestriaDB {
         }
         return weapons; 
     }
-    
+
     public ObservableList<String> getShieldsForCombo() {
         ObservableList<String> shields = FXCollections.observableArrayList();
 
@@ -1203,7 +1209,7 @@ public class NestriaDB {
         }
         return shields; 
     }
-    
+
     public ObservableList<String> getKingdomsForCombo() {
         ObservableList<String> kingdoms = FXCollections.observableArrayList();
 
@@ -1239,7 +1245,7 @@ public class NestriaDB {
         }
         return kingdoms; 
     }
-    
+
     public ObservableList<String> getGoalsForCombo() {
         ObservableList<String> goals = FXCollections.observableArrayList();
 
@@ -1275,7 +1281,7 @@ public class NestriaDB {
         }
         return goals; 
     }
-    
+
     public ObservableList<String> getTribesForCombo() {
         ObservableList<String> tribes = FXCollections.observableArrayList();
 
