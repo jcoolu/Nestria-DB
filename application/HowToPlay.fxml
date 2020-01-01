@@ -19,40 +19,37 @@
         <URL value="@Images/application.css" />
       </stylesheets>
     </Button>
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#cce0ff" height="362.0" layoutX="615.0" layoutY="358.0" stroke="BLACK" strokeType="INSIDE" width="665.0" />
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffdcc" height="359.0" layoutX="629.0" layoutY="0.0" stroke="BLACK" strokeType="INSIDE" width="651.0" />
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffe4cc" height="362.0" layoutX="0.0" layoutY="358.0" stroke="BLACK" strokeType="INSIDE" width="629.0000999999975" />
+    <Button layoutX="1.0" layoutY="359.0" mnemonicParsing="false" prefHeight="360.0" prefWidth="629.0001220703125" text="">
+      <stylesheets>
+        <URL value="@Images/addplayer.css" />
+      </stylesheets>
+    </Button>
+    <Button layoutX="629.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="360.0" prefWidth="651.0" text="">
+      <stylesheets>
+        <URL value="@Images/healplayer.css" />
+      </stylesheets>
+    </Button>
+    <Button layoutX="629.0" layoutY="359.0" mnemonicParsing="false" prefHeight="360.0" prefWidth="651.0" text="">
+      <stylesheets>
+        <URL value="@Images/addplayer.css" />
+      </stylesheets>
+    </Button>
     <Button layoutX="34.0" layoutY="31.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="32.0" prefWidth="150.0" text="Go Back" />
-    <Button layoutX="87.0" layoutY="143.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="194.0" text="Enter Arena" textFill="RED">
-      <effect>
-        <DropShadow color="RED" height="132.0985398065476" radius="65.60201590401785" width="132.3095238095238" />
-      </effect>
+    <Button layoutX="87.0" layoutY="96.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="194.0" text="Enter Arena" textFill="RED">
       <font>
         <Font size="20.0" fx:id="x1" />
       </font>
     </Button>
-    <Button font="$x1" layoutX="87.0" layoutY="467.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="194.0" text="Add Player" textFill="$x2">
-      <effect>
-        <DropShadow height="126.0308900669643" radius="62.56522251674107" width="126.23">
-          <color>
-            <Color blue="0.000" green="0.480" red="1.000" fx:id="x2" />
-          </color>
-        </DropShadow>
-      </effect>
+    <Button font="$x1" layoutX="87.0" layoutY="467.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="194.0" text="Add Player">
+      <textFill>
+        <Color blue="0.000" green="0.480" red="1.000" fx:id="x2" />
+      </textFill>
     </Button>
-    <Button font="$x1" layoutX="640.0" layoutY="143.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="194.0" text="Heal Player" textFill="#fff500">
-      <effect>
-        <DropShadow color="#fff733" height="126.0308900669643" radius="62.56522251674107" width="126.23" />
-      </effect>
-    </Button>
-    <Button font="$x1" layoutX="640.0" layoutY="467.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="194.0" text="View Info" textFill="$x3">
-      <effect>
-        <DropShadow height="126.0308900669643" radius="62.56522251674107" width="126.23">
-          <color>
-            <Color blue="1.000" green="0.160" red="0.000" fx:id="x3" />
-          </color>
-        </DropShadow>
-      </effect>
+    <Button font="$x1" layoutX="640.0" layoutY="143.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="194.0" text="Heal Player" textFill="#fff500" />
+    <Button font="$x1" layoutX="640.0" layoutY="467.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="194.0" text="View Info">
+      <textFill>
+        <Color blue="1.000" green="0.160" red="0.000" fx:id="x3" />
+      </textFill>
     </Button>
     <TextArea editable="false" layoutX="335.0" layoutY="96.0" prefHeight="217.0" prefWidth="233.0" style="-fx-font-weight: bold;&#10;-fx-font-style: italic;&#10;-fx-text-fill: black;&#10;-fx-font-size: 104%;" text="Enter the Arena and face off against various creatures. You have three options, ATTACK, DEFEND, or RUN. &#10;&#10;* ATTACK - Attack the Creature, however your player is vulnerable and takes damage as well.&#10;&#10;* DEFEND - Defend yourself from the creature's attack depending on your player's defense. &#10;&#10;* RUN - Return back to safety &#10;(Main Menu)" wrapText="true">
       <stylesheets>
