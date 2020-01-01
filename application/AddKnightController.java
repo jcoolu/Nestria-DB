@@ -69,6 +69,7 @@ public class AddKnightController extends MainMenuController implements Initializ
      * When AddKnightController is called
      */
     public void initialize(URL url, ResourceBundle rb) {
+        //for Combo box
         knightWeapon.getItems().removeAll(knightWeapon.getItems());
         knightWeapon.getItems().addAll(options);
         knightWeapon.getSelectionModel().select(options.get(1));

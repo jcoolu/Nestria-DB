@@ -172,16 +172,17 @@ public class NestriaDB {
     public Player healPlayer(TextField enter, TextField heal, TextField name, TextField id, TextField health) {
         PreparedStatement stmt = null;  
         String sql;
-        ResultSet rset = null;
-        Player pl = getPlayer(Integer.parseInt(enter.getText()));
-        int playerhealth = pl.getHealth() + Integer.parseInt(heal.getText());
-
+        Player pl = null;
+       
         // Return if the database is closed.
         if (!isopen) {
             return null;
         }
 
         try {
+            pl = getPlayer(Integer.parseInt(enter.getText()));
+            int playerhealth = pl.getHealth() + Integer.parseInt(heal.getText());
+
             sql = "UPDATE Player SET Health = ? WHERE Id = ?;";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1,playerhealth); //giving error
@@ -192,23 +193,15 @@ public class NestriaDB {
 
             stmt.close();
             conn.commit();
+            pl = getPlayer(pl.getId());
             try {stmt.close();}
             catch (Exception err) {;}
             try {conn.rollback();}
             catch (Exception err) {;}
 
-            pl = getPlayer(pl.getId());
-            try{
-                stmt.close();
-                rset.close();
-                conn.commit();
-            }
-            catch (Exception e) {
-
-            }
         } catch (Exception e) {
             System.out.printf("%s%n", e.getMessage());
-
+            return null;
         }
         try {stmt.close();}
         catch (Exception err) {}
@@ -222,8 +215,7 @@ public class NestriaDB {
     public Creature healCreature(TextField enter, TextField heal) {
         PreparedStatement stmt = null;  
         String sql;
-        ResultSet rset = null;
-        Creature cr;
+        Creature cr = null;
         
         if (!isopen) {
             return null;
@@ -240,34 +232,15 @@ public class NestriaDB {
 
             // Execute the update.
             stmt.executeUpdate();
-
             stmt.close();
             conn.commit();
-            try {stmt.close();}
-            catch (Exception err) {return null;}
-            try {conn.rollback();}
-            catch (Exception err) {
-                return null;
-            }
-
             cr = getCreature(cr.getId());
-
-            try{
-                stmt.close();
-                rset.close();
-                conn.commit();
-            }
-            catch (Exception e) {
-                return null;
-            }
         } catch (Exception e) {
             System.out.printf("%s%n", e.getMessage());
             return null;
         }
         try {stmt.close();}
-        catch (Exception err) {
-            return null;
-        }
+        catch (Exception err) {}
         return cr;
     }
 
