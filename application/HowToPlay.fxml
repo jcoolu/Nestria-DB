@@ -31,7 +31,7 @@
     </Button>
     <Button layoutX="629.0" layoutY="359.0" mnemonicParsing="false" prefHeight="360.0" prefWidth="651.0" text="">
       <stylesheets>
-        <URL value="@Images/addplayer.css" />
+        <URL value="@Images/viewinfo.css" />
       </stylesheets>
     </Button>
     <Button layoutX="34.0" layoutY="31.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="32.0" prefWidth="150.0" text="Go Back" />
