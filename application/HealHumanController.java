@@ -55,7 +55,7 @@ public class HealHumanController extends MainMenuController implements Initializ
      */
     public void heal() {
         //get player from textfield
-        Player pl = db.healPlayer(EnterPlayerId, HealBy, PlayerName, PlayerId, PlayerHealth);
+        Player pl = db.healPlayer(EnterPlayerId, HealBy);
         if(pl == null) {
             PlayerName.setText("N/A");
             PlayerHealth.setText("N/A");

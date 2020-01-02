@@ -71,5 +71,7 @@
         <URL value="@Images/application.css" />
       </stylesheets>
     </TextArea>
+    <Text layoutX="610.0" layoutY="32.0" scaleX="4.198573908421397" scaleY="3.070916180114443" strokeType="OUTSIDE" strokeWidth="0.0" text="How To Play" />
+    <Text fill="WHITE" layoutX="613.0" layoutY="34.0" scaleX="4.198573908421397" scaleY="3.070916180114443" strokeType="OUTSIDE" strokeWidth="0.0" text="How To Play" />
   </children>
 </AnchorPane>

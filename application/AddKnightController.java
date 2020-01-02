@@ -211,5 +211,6 @@ public class AddKnightController extends MainMenuController implements Initializ
             }  
         }
         setUpText(); //clears fields    
+        ids.setItems(db.viewPlayers());
     }
 }

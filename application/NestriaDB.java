@@ -6,28 +6,21 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javafx.scene.control.TextField;
-import javafx.fxml.FXML;
 import java.util.*;
-import javafx.scene.control.TableView;
 import javafx.collections.*;
 import javafx.scene.image.*;
-import java.io.FileNotFoundException;
 import java.io.*;
-import java.io.ByteArrayOutputStream;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
-import javax.sql.rowset.serial.SerialBlob;
 
 public class NestriaDB {
-    private Connection conn;
-    private boolean isopen;
+    private Connection conn; // connection to DB
+    private boolean isopen; // tests to see whether DB is open (true) or not (false)
 
-    //Variables used in HealPlayer/HealCreature
-    private String idtext, nametext, healthtext;
-    private String creatureidtext, creaturenametext, creaturehealthtext;
-
+    /**
+     * Constructor -- establishes connection to DB.
+     */
     public NestriaDB() {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -39,10 +32,14 @@ public class NestriaDB {
         isopen = (conn != null);
     }
 
-    // Test whether the database is open.
+    /**
+     * Test whether the database is open.
+     */
     public boolean isOpen() {return isopen;}
 
-    // Close the database connection.
+    /**
+     * Close the database connection.
+     */ 
     public void close() {
         if (!isopen) return;
         try {conn.close();}
@@ -51,6 +48,9 @@ public class NestriaDB {
         conn = null;
     }
 
+    /**
+     * Returns connection to DB.
+     */
     public Connection getConnection() {
         return conn;
     }
@@ -58,25 +58,29 @@ public class NestriaDB {
     /**
      * Defend method for Arena. Player is the only one being attacked by creature.
      * Updates health based on its own defense and the creature's attack.
+     * cr - Creature in Arena
+     * pl - Player in Arena
      */
     public void defend(Creature cr, Player pl) {
         PreparedStatement stmt = null;  
         String sql;
-        int creaturedamage = 0;
+        int creaturedamage = 0; // initializes creaturedamage to 0
+
         if(cr.getAttack() > pl.getDefense()) {
             creaturedamage = cr.getAttack() - pl.getDefense();
         }
         else {
         }
         int health = pl.getHealth()-creaturedamage;
+
         // Return if the database is closed.
         if (!isopen) {
             return;
-            //return null;
         }
 
+        // execute updates on both player (since creature is only one attacking)
         try {
-
+            // updates player's health to specific number
             sql = "UPDATE Player SET Health = ? WHERE Id = ? ;";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1,health); 
@@ -84,13 +88,11 @@ public class NestriaDB {
 
             // Execute the update.
             stmt.executeUpdate();
-
             stmt.close();
             conn.commit();
 
         } catch (Exception e) {
             System.out.printf("%s%n", e.getMessage());
-
         }
         finally {
             try {stmt.close();}
@@ -106,14 +108,16 @@ public class NestriaDB {
         }
     }
 
-    /**\
-     * Affects both player and creature health. Used in Arena. 
+    /**
+     * Used in Arena. Affects both player and creature health. 
+     * cr - Creature in Arena
+     * pl - Player in Arena
      */      
     public void attack(Creature cr, Player pl) {
         PreparedStatement stmt = null;  
         String sql;
-        int playerdamage = pl.getHealth() - cr.getAttack();
-        int creaturedamage = cr.getHealth() - pl.getAttack();
+        int playerdamage = pl.getHealth() - cr.getAttack(); // player's health
+        int creaturedamage = cr.getHealth() - pl.getAttack(); // creature's health
 
         // Return if the database is closed.
         if (!isopen) {
@@ -122,7 +126,7 @@ public class NestriaDB {
         }
 
         try {
-
+            // update player's health
             sql = "UPDATE Player SET Health = ? WHERE Id = ? ;";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1,playerdamage); //giving error
@@ -130,11 +134,10 @@ public class NestriaDB {
 
             // Execute the update.
             stmt.executeUpdate();
-
             stmt.close();
             conn.commit();
 
-            // Create a PreparedStatement for the query.
+            // Update Creature's health
             sql = "UPDATE Creature SET Health = ? WHERE Id = ?";
 
             stmt = conn.prepareStatement(sql);
@@ -167,22 +170,25 @@ public class NestriaDB {
 
     /**
      * Used in Heal Player
-     * Heals player by how many health is entered in TextField.
+     * Heals player by how much health is entered in TextField.
+     * enter - Textfield where Id is entered.
+     * heal - Textfield where amount of health added is entered.
      */
-    public Player healPlayer(TextField enter, TextField heal, TextField name, TextField id, TextField health) {
+    public Player healPlayer(TextField enter, TextField heal) {
         PreparedStatement stmt = null;  
         String sql;
         Player pl = null;
-       
+
         // Return if the database is closed.
         if (!isopen) {
             return null;
         }
 
         try {
-            pl = getPlayer(Integer.parseInt(enter.getText()));
-            int playerhealth = pl.getHealth() + Integer.parseInt(heal.getText());
+            pl = getPlayer(Integer.parseInt(enter.getText())); // gets player
+            int playerhealth = pl.getHealth() + Integer.parseInt(heal.getText()); // gets player health
 
+            // updates player's health
             sql = "UPDATE Player SET Health = ? WHERE Id = ?;";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1,playerhealth); //giving error
@@ -191,40 +197,41 @@ public class NestriaDB {
             // Execute the update.
             stmt.executeUpdate();
 
-            stmt.close();
             conn.commit();
+            //sets updated player info
             pl = getPlayer(pl.getId());
             try {stmt.close();}
             catch (Exception err) {;}
             try {conn.rollback();}
             catch (Exception err) {;}
-
         } catch (Exception e) {
             System.out.printf("%s%n", e.getMessage());
             return null;
         }
-        try {stmt.close();}
-        catch (Exception err) {}
         return pl;
     }
 
     /**
      * Used in Heal Creature
-     * Heals creature by how many health is entered in TextField.
+     * Heals creature by how much health is entered in TextField.
+     * enter - Textfield where Id is entered.
+     * heal - Textfield where amount of health added is entered..
      */
     public Creature healCreature(TextField enter, TextField heal) {
         PreparedStatement stmt = null;  
         String sql;
-        Creature cr = null;
-        
+        Creature cr = null; 
+
         if (!isopen) {
             return null;
         }
-        
+
         try {
+            // gets creature being healed
             cr = getCreature(Integer.parseInt(enter.getText()));
             int creaturehealth = cr.getHealth() + Integer.parseInt(heal.getText());
-            
+
+            // updates creature's health
             sql = "UPDATE Creature SET Health = ? WHERE Id = ?;";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1,creaturehealth); 
@@ -232,35 +239,48 @@ public class NestriaDB {
 
             // Execute the update.
             stmt.executeUpdate();
-            stmt.close();
             conn.commit();
+
+            // updates creature being returned
             cr = getCreature(cr.getId());
+            try {stmt.close();}
+            catch (Exception err) {;}
+            try {conn.rollback();}
+            catch (Exception err) {;}
         } catch (Exception e) {
             System.out.printf("%s%n", e.getMessage());
             return null;
         }
-        try {stmt.close();}
-        catch (Exception err) {}
         return cr;
     }
 
     /**
      * Used in AddKnight. Adds a Knight to DB. Returns true or false.
+     * id - Knight's id
+     * name - Knight's name
+     * attack - Knight's attack
+     * defense - Knight's defense
+     * health - Knight's health
+     * weapon - Knight's weapon
+     * shield - Knight's shield
+     * kingdom - Knight's kingdom
+     * goal - Knight's goal
+     * fl - Knight's image
      */
     public boolean addKnight(TextField id, TextField name, TextField attack, TextField defense, TextField health, int weapon, int shield, int kingdom, int goal, byte[] fl) {
         PreparedStatement stmt = null;
         ResultSet rset = null;
         String sql, nameTxt, attackTxt, defenseTxt, healthTxt;
-        boolean result = false;
+        boolean result = false; // result whether knight was added or not
 
         // Return if the database is closed.
         if (!isopen) return result;
 
         try {
-
+            //gets knight's id
             int knightId = Integer.parseInt(id.getText());
 
-            // Create a PreparedStatement for the update.
+            // adds a player
             sql = "INSERT INTO Player(id,Name, Health, Attack, Defense, Weapon, Shield," 
             + "Goal) VALUES (?,?,?,?,?,?,?,?);";
             stmt = conn.prepareStatement(sql);
@@ -278,6 +298,7 @@ public class NestriaDB {
             stmt.close();
             conn.commit();
 
+            // adds a knight
             sql = "INSERT INTO Knight(id, Kingdom) VALUES (?,?);";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, knightId);
@@ -288,6 +309,7 @@ public class NestriaDB {
             stmt.close();
             conn.commit();
 
+            // adds image into Picture
             sql = "INSERT INTO Picture(ImageFile) VALUES (?);";
             stmt = conn.prepareStatement(sql);
             stmt.setBytes(1, fl);
@@ -297,6 +319,7 @@ public class NestriaDB {
             stmt.close();
             conn.commit();
 
+            // selects Picture
             sql = "SELECT Id FROM Picture WHERE Id = (SELECT MAX(Id) FROM Picture);";
             stmt = conn.prepareStatement(sql);
             rset = stmt.executeQuery();
@@ -306,36 +329,47 @@ public class NestriaDB {
             rset.close();
             conn.commit();
 
+            // adds picture to new knight
             sql = "INSERT INTO PlayerPics(Picture, Player) VALUES (?,?);";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, picId);
             stmt.setInt(2, knightId);
 
             stmt.executeUpdate();
-            stmt.close();
-            rset.close();
             conn.commit();
 
-            result = true;
+            result = true; // knight was successfully added
         } catch (Exception e) {
             System.out.printf("%s%n", e.getMessage());
-
-            try {stmt.close();}
-            catch (Exception err) {;}
-            try {conn.rollback();}
-            catch (Exception err) {;}
         }
+        try {
+            stmt.close();
+            rset.close();
+        }
+        catch (Exception err) {;}
+        try {conn.rollback();}
+        catch (Exception err) {;}
         return result;
     }
 
     /**
      * Used in AddViking. Adds a Viking to DB. Returns true or false.
+     * id - Viking's id
+     * name - Viking's name
+     * attack - Viking's attack
+     * defense - Viking's defense
+     * health - Viking's health
+     * weapon - Viking's weapon
+     * shield - Viking's shield
+     * kingdom - Viking's kingdom
+     * goal - Viking's goal
+     * fl - Viking's image
      */
     public boolean addViking(TextField id, TextField name, TextField attack, TextField defense, TextField health, int weapon, int shield, int tribe, int goal, byte[] fl) {
         PreparedStatement stmt = null;
         ResultSet rset = null;
         String sql, nameTxt, attackTxt, defenseTxt, healthTxt;
-        boolean result = false;
+        boolean result = false;// result whether viking was added or not
 
         // Return if the database is closed.
         if (!isopen) return result;
@@ -344,7 +378,7 @@ public class NestriaDB {
 
             int vikingId = Integer.parseInt(id.getText());
 
-            // Create a PreparedStatement for the update.
+            // adds player
             sql = "INSERT INTO Player(id,Name, Health, Attack, Defense, Weapon, Shield," 
             + "Goal) VALUES (?,?,?,?,?,?,?,?);";
             stmt = conn.prepareStatement(sql);
@@ -362,6 +396,7 @@ public class NestriaDB {
             stmt.close();
             conn.commit();
 
+            // adds viking
             sql = "INSERT INTO Viking(id, Tribe) VALUES (?,?);";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, vikingId);
@@ -371,6 +406,7 @@ public class NestriaDB {
             stmt.close();
             conn.commit();
 
+            //adds image
             sql = "INSERT INTO Picture(ImageFile) VALUES (?);";
             stmt = conn.prepareStatement(sql);
             stmt.setBytes(1, fl);
@@ -380,6 +416,7 @@ public class NestriaDB {
             stmt.close();
             conn.commit();
 
+            // finds picture
             sql = "SELECT Id FROM Picture WHERE Id = (SELECT MAX(Id) FROM Picture);";
             stmt = conn.prepareStatement(sql);
             rset = stmt.executeQuery();
@@ -389,31 +426,32 @@ public class NestriaDB {
             rset.close();
             conn.commit();
 
+            // adds picture for viking
             sql = "INSERT INTO PlayerPics(Picture, Player) VALUES (?,?);";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, picId);
             stmt.setInt(2, vikingId);
 
             stmt.executeUpdate();
-            stmt.close();
-            rset.close();
             conn.commit();
 
             result = true;
 
         } catch (Exception e) {
             System.out.printf("%s%n", e.getMessage());
-
-            try {stmt.close();}
-            catch (Exception err) {;}
-            try {conn.rollback();}
-            catch (Exception err) {;}
         }
+        try {
+            stmt.close();
+            rset.close();
+        }
+        catch (Exception err) {;}
+        try {conn.rollback();}
+        catch (Exception err) {;}
         return result;
     }
 
     /**
-     * Used in ViewPlayer. Views all players in DB. (Added characters DO NOT have a picture/image.
+     * Used in ViewPlayer. Views all players in DB.
      */
     public ObservableList<Player> viewPlayers() {
         ObservableList<Player> table = FXCollections.observableArrayList();
@@ -429,6 +467,7 @@ public class NestriaDB {
 
         if (!isopen) return null;
         try {
+            // view all players
             sql = "SELECT Player.id, Player.Name, Player.Health, Player.Attack, " +
             "Player.Defense, Goal.Objective, Weapon.Name AS Weapon, Shield.Name AS Shield, Kingdom.Name AS Kingdom, " +
             "Tribe.Name AS Tribe, Picture.ImageFile FROM Player LEFT JOIN Knight ON Knight.id = Player.id LEFT JOIN " + 
@@ -439,8 +478,6 @@ public class NestriaDB {
 
             stmt = conn.prepareStatement(sql);
             rset = stmt.executeQuery();
-
-            int i = 0;
 
             while (rset.next()) {
                 id = rset.getInt(1);
@@ -453,8 +490,9 @@ public class NestriaDB {
                 weapon = rset.getString(8);
                 kingdom = rset.getString(9);
                 tribe = rset.getString(10);
-
                 array = rset.getBytes(11);
+
+                // add image if array is not null
                 if(array != null) {
                     ByteArrayInputStream bis = new ByteArrayInputStream(array);
                     BufferedImage b = ImageIO.read(bis);
@@ -464,9 +502,8 @@ public class NestriaDB {
                     image = null;
                 }
                 table.add(new Player(id, name, health, attack, defense, weapon, shield, goal, kingdom, tribe, im = new ImageView(image)));
-                im.setFitHeight(200);
-                im.setFitWidth(150);
-                i++;
+                im.setFitHeight(200); // set height of pic
+                im.setFitWidth(150); // set width of pic
             }
             try{
                 stmt.close();
@@ -478,7 +515,6 @@ public class NestriaDB {
             }
         }
         catch (Exception e) {
-            System.out.println(e);
             return null;
         }
         return table;
@@ -497,11 +533,12 @@ public class NestriaDB {
         dragonSpecies, wingspan, trollColor, trollSpecies, wolfColor, wolfSpecies;
         ImageView im = null;
         Image image = null;
-        byte[] array;
+        byte[] array; // image
 
         if (!isopen) return null;
 
         try {
+            // gets all creatures
             sql = "SELECT Creature.id, Creature.Name, Creature.Health, Creature.Behavior, " +
             "Creature.Attack, Creature.Defense, Creature.Size, Creature.Habitat, Dragon.Color " +
             "AS [Dragon Color], Dragon.Species AS [Dragon Species], Dragon.Wingspan AS Wingspan," +
@@ -515,8 +552,6 @@ public class NestriaDB {
 
             stmt = conn.prepareStatement(sql);
             rset = stmt.executeQuery();
-
-            int i = 0;
 
             while (rset.next()) {
                 id = rset.getInt(1);
@@ -535,23 +570,19 @@ public class NestriaDB {
                 trollSpecies = rset.getString(14);
                 wolfColor = rset.getString(15);
                 wolfSpecies = rset.getString(16);
-                if(i > 24
-                ) {
-                    table.add(new Creature(id, name, health, behavior, attack, defense, size, habitat,
-                            dragonColor, dragonSpecies, wingspan, weapon, trollColor, trollSpecies, wolfColor, wolfSpecies, null)); 
-                }
-                else{
-                    array = rset.getBytes(17);
+                array = rset.getBytes(17);
+                if(array != null) {
                     ByteArrayInputStream bis = new ByteArrayInputStream(array);
                     BufferedImage b = ImageIO.read(bis);
                     image = SwingFXUtils.toFXImage(b,null);
-
-                    table.add(new Creature(id, name, health, behavior, attack, defense, size, habitat,
-                            dragonColor, dragonSpecies, wingspan, weapon, trollColor, trollSpecies, wolfColor, wolfSpecies, im = new ImageView(image))); 
-                    im.setFitHeight(200);
-                    im.setFitWidth(150);
-                    i++; 
                 }
+                else {
+                    image = null;
+                }
+                table.add(new Creature(id, name, health, behavior, attack, defense, size, habitat,
+                        dragonColor, dragonSpecies, wingspan, weapon, trollColor, trollSpecies, wolfColor, wolfSpecies, im = new ImageView(image))); 
+                im.setFitHeight(200); // set height of pic
+                im.setFitWidth(150); // set width of pic
             }
             try{
                 stmt.close();
@@ -569,7 +600,9 @@ public class NestriaDB {
     }
 
     /**
-     * Used in ViewPlayer. Views all players in DB. (Added characters DO NOT have a picture/image.
+     * Used in Arena. Views all players in DB.
+     * Same as viewPlayers but returns as arraylist and 
+     * only includes players that HAVE a picture
      */
     public ArrayList<Player> getPlayers() {
         ArrayList<Player> table = new ArrayList<Player>();
@@ -578,9 +611,7 @@ public class NestriaDB {
         ResultSet rset = null;
         int id, health, attack, defense;
         String name, sql, weapon, shield, goal, tribe, kingdom;
-        ImageView im = null;
-        Image image = null;
-        byte[] array;
+        byte[] array; // image
 
         if (!isopen) return null;
         try {
@@ -608,7 +639,7 @@ public class NestriaDB {
                 tribe = rset.getString(10);
                 array = rset.getBytes(11);
 
-                table.add(new Player(id, name, health, attack, defense, weapon, shield, goal, kingdom, tribe, im));
+                table.add(new Player(id, name, health, attack, defense, weapon, shield, goal, kingdom, tribe, null)); // adds player to arraylist
             }
             conn.commit();
         }
@@ -628,6 +659,11 @@ public class NestriaDB {
         return table;
     }
 
+    /**
+     * Used in Arena. Views all creatures in DB.
+     * Same as viewCreatures but returns as arraylist and 
+     * only includes creatures that HAVE a picture
+     */
     public ArrayList<Creature> getCreatures() {
         ArrayList<Creature> table = new ArrayList<Creature>();
 
@@ -636,8 +672,6 @@ public class NestriaDB {
         int id, health, attack, defense;
         String name, sql, weapon, behavior, size, habitat, dragonColor, 
         dragonSpecies, wingspan, trollColor, trollSpecies, wolfColor, wolfSpecies;
-        Image image = null;
-        ImageView im = new ImageView();
         byte[] array;
 
         if (!isopen) return null;
@@ -675,11 +709,10 @@ public class NestriaDB {
                 trollSpecies = rset.getString(14);
                 wolfColor = rset.getString(15);
                 wolfSpecies = rset.getString(16);
-
                 array = rset.getBytes(17);
 
                 table.add(new Creature(id, name, health, behavior, attack, defense, size, habitat,
-                        dragonColor, dragonSpecies, wingspan, weapon, trollColor, trollSpecies, wolfColor, wolfSpecies, im)); 
+                        dragonColor, dragonSpecies, wingspan, weapon, trollColor, trollSpecies, wolfColor, wolfSpecies, null)); 
             }
             conn.commit();
         }
@@ -717,6 +750,7 @@ public class NestriaDB {
         if (!isopen) return null;
 
         try {
+            // gets all weapons
             sql = "SELECT Weapon.id, Weapon.Name, Weapon.Attack, Picture.ImageFile " +
             "FROM Weapon INNER JOIN Picture ON Weapon.Picture = Picture.Id;";
 
@@ -769,6 +803,7 @@ public class NestriaDB {
         if (!isopen) return null;
 
         try {
+            // gets all shields
             sql = "SELECT Shield.id, Shield.Name, Shield.Defense, " + 
             "Picture.ImageFile FROM Shield INNER JOIN Picture ON Shield.Picture = Picture.Id;";
 
@@ -821,6 +856,7 @@ public class NestriaDB {
         if (!isopen) return null;
 
         try {
+            // gets all scenery
             sql = "SELECT Scenery.id, Scenery.region, Scenery.effect, Picture.ImageFile " +
             "FROM Scenery INNER JOIN Picture ON Scenery.Background = Picture.Id;";
 
@@ -858,7 +894,7 @@ public class NestriaDB {
     }
 
     /**
-     * Used in ViewScenery. Views all scenery in DB. 
+     * Method returns a specific image (byte[]) by its id. 
      */
     public byte[] getPicture(int id) {
 
@@ -871,6 +907,7 @@ public class NestriaDB {
         if (!isopen) return null;
 
         try {
+            //gets specific picture
             sql = "SELECT Picture.ImageFile FROM Picture WHERE Picture.Id = ?;";
 
             stmt = conn.prepareStatement(sql);
@@ -895,6 +932,9 @@ public class NestriaDB {
         return array;
     }
 
+    /**
+     * Method returns a specific Player by its id. 
+     */
     public Player getPlayer(int idm) {
         Player pl = null;
 
@@ -908,6 +948,7 @@ public class NestriaDB {
 
         if (!isopen) return null;
         try {
+            // returns specific player
             sql = "SELECT Player.id, Player.Name, Player.Health, Player.Attack, " +
             "Player.Defense, Goal.Objective, Weapon.Name AS Weapon, Shield.Name AS Shield, Kingdom.Name AS Kingdom, " +
             "Tribe.Name AS Tribe, Picture.ImageFile FROM Player LEFT JOIN Knight ON Knight.id = Player.id LEFT JOIN " + 
@@ -956,8 +997,10 @@ public class NestriaDB {
         return pl;    
     }
 
+    /**
+     * Method returns a specific Creature by its id. 
+     */
     public Creature getCreature(int idm) {
-
         PreparedStatement stmt = null;
         ResultSet rset = null;
         Creature cr = null;
@@ -970,6 +1013,7 @@ public class NestriaDB {
         if (!isopen) return null;
 
         try {
+            // returns specific creature
             sql = "SELECT Creature.id, Creature.Name, Creature.Health, Creature.Behavior, " +
             "Creature.Attack, Creature.Defense, Creature.Size, Creature.Habitat, Dragon.Color " + 
             "AS [Dragon Color], Dragon.Species AS [Dragon Species], Dragon.Wingspan AS Wingspan, " + 
@@ -1028,9 +1072,11 @@ public class NestriaDB {
         }
         return cr;
     }
-
+    
+    /**
+     * Method returns a specific Creature's image by its id. 
+     */
     public Image getCreaturePic(int idm) {
-
         PreparedStatement stmt = null;
         ResultSet rset = null;
         Creature cr = null;
@@ -1071,6 +1117,9 @@ public class NestriaDB {
         return image;
     }
 
+    /**
+     * Method returns a specific Player's image by its id. 
+     */
     public Image getPlayerPic(int idm) {
         PreparedStatement stmt = null;
         ResultSet rset = null;
@@ -1111,6 +1160,9 @@ public class NestriaDB {
         return image;
     }
 
+    /**
+     * Method returns weapons list. (ObservableList)
+     */
     public ObservableList<String> getWeaponsForCombo() {
         ObservableList<String> weapons = FXCollections.observableArrayList();
 
@@ -1147,6 +1199,9 @@ public class NestriaDB {
         return weapons; 
     }
 
+    /**
+     * Method returns shields list. (ObservableList)
+     */
     public ObservableList<String> getShieldsForCombo() {
         ObservableList<String> shields = FXCollections.observableArrayList();
 
@@ -1183,6 +1238,9 @@ public class NestriaDB {
         return shields; 
     }
 
+    /**
+     * Method returns kingdoms list. (ObservableList)
+     */
     public ObservableList<String> getKingdomsForCombo() {
         ObservableList<String> kingdoms = FXCollections.observableArrayList();
 
@@ -1219,6 +1277,9 @@ public class NestriaDB {
         return kingdoms; 
     }
 
+    /**
+     * Method returns goals list. (ObservableList)
+     */
     public ObservableList<String> getGoalsForCombo() {
         ObservableList<String> goals = FXCollections.observableArrayList();
 
@@ -1255,6 +1316,9 @@ public class NestriaDB {
         return goals; 
     }
 
+    /**
+     * Method returns tribes list. (ObservableList)
+     */
     public ObservableList<String> getTribesForCombo() {
         ObservableList<String> tribes = FXCollections.observableArrayList();
 

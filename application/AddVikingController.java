@@ -210,5 +210,6 @@ public class AddVikingController  extends MainMenuController implements Initiali
             }  
         }
         setUpText(); //clears fields    
+        ids.setItems(db.viewPlayers());
     }
 }
