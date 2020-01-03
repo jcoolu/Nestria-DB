@@ -40,44 +40,46 @@ Add a Knight or a Viking.
 
 * Knight: 
 
-	ID: Integer
+	- ID: Integer
 
-	NAME: String
+	- NAME: String
 
-	ATTACK: Integer
+	- ATTACK: Integer
 
-	DEFENSE: Integer
+	- DEFENSE: Integer
 
-	WEAPON: Selection
+	- WEAPON: Selection
 
-	SHIELD: Selection
+	- SHIELD: Selection
 
-	KINGDOM: Selection
+	- KINGDOM: Selection
 
 * Viking:
  
-	ID: Integer
+	- ID: Integer
 
-	NAME: String
+	- NAME: String
 
-	ATTACK: Integer
+	- ATTACK: Integer
 
-	DEFENSE: Integer
+	- DEFENSE: Integer
 
-	WEAPON: Selection
+	- WEAPON: Selection
 
-	SHIELD: Selection
+	- SHIELD: Selection
 
-	TRIBE: Selection
+	- TRIBE: Selection
 ----------------------------------------------------------------------------------------------------------------------------------------
 ### Heal Players
-Heal either a Creature or Player.
+Heal either a Creature or Player(Knight or Viking).
 
+![creature](/application/Images/creature2.png) 
 * Creature:
 
 	ID: Integer
 	HEALTH: Integer
-
+	
+![player](/application/Images/player2.png) 
 * Player:
 
 	ID: Integer
@@ -87,15 +89,15 @@ Heal either a Creature or Player.
 ### View Information
 View the Information of any of the assets or characters used in this game. 
 
-* Players
+* Players![players](/application/Images/player.png) 
 
-* Creatures
+* Creatures![creatures](/application/Images/Creatures.png) 
 
-* Weapons
+* Weapons![weapon](/application/Images/weapon2.png) 
 
-* Shields
+* Shields![shield](/application/Images/shield2.png) 
 
-* Scenery
+* Scenery![scenery](/application/Images/scenery.png) 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 ## ![Book](/application/Images/book.png)How To Install <a name = "how-to-install"> </a>
