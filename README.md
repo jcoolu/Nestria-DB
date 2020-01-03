@@ -6,8 +6,8 @@ GUI program created in Java that allows the user to access the database Nestria.
 
 - ![Nestria Icon](/application/Images/NestriaIcon.png)[What is Nestria?](#what-is-nestria?)
 - ![Camera Flash](/application/Images/lightbulb.png)[Features](#Features)
-- How to Install
-- Credits
+- ![Book](/application/Images/book.png)[How to Install](#how-to-install)
+- ![Smile](/application/Images/smile.png)[Credits](#credits)
 
 ## ![Nestria Icon](/application/Images/NestriaIcon.png)What is Nestria? <a name = "what-is-nestria?"></a>
 ![Enter Arena](/application/Images/arena.png "Enter Arena Scene")
@@ -23,13 +23,17 @@ Some features of this program are you can enter the arena (attack other creature
 
 ### Enter the Arena
 
-------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
 ### Add Players
 
-------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
 ### Heal Players
 
-------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
 ### View Information
 
-------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
+
+## How To Install <a name = "how-to-install"> </a>
+
+## Credits <a name = "credits"> </a>
