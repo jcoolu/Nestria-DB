@@ -18,7 +18,7 @@ Nestria is a video game I designed while coming up with a topic for my databases
 
 This project is Java application created for my Databases class. Java, JavaFX, and SQLite were the main factors in designing this program to allow users to interact with the Nestria Database. 
 
-## Features <a name = "Features"> </a>
+## ![Camera Flash](/application/Images/lightbulb.png)Features <a name = "Features"> </a>
 Some features of this program are you can enter the arena (attack other creatures), add a knight or viking, heal creatures and players, and view information allocated in the Nestria database. 
 
 ### Enter the Arena
@@ -34,6 +34,6 @@ Some features of this program are you can enter the arena (attack other creature
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
-## How To Install <a name = "how-to-install"> </a>
+## ![Book](/application/Images/book.png)How To Install <a name = "how-to-install"> </a>
 
-## Credits <a name = "credits"> </a>
+## ![Smile](/application/Images/smile.png)Credits <a name = "credits"> </a>
