@@ -22,9 +22,9 @@ This project is Java application created for my Databases class. Java, JavaFX, a
 Some features of this program are you can enter the arena (attack other creatures), add a knight or viking, heal creatures and players, and view information allocated in the Nestria database. 
 
 ### Enter the Arena
-![Arena](/application/Images/arena2.png)
+![Arena](/application/Images/arena2.PNG)
 Enter the Arena and you (the player) will battle with various creatures. You have three options:
-![Attack](/application/Images/attack.png)![Defend](/application/Images/defend.png)![Run](/application/Images/run.png)
+![Attack](/application/Images/attack.PNG)![Defend](/application/Images/defend.PNG)![Run](/application/Images/run.PNG)
 
 * ATTACK - Attack the Creature, however your player is vulnerable and takes damage as well.
 
