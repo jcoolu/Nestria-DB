@@ -126,6 +126,6 @@ Download Link: [SQLite](https://www.dropbox.com/sh/iyilxtepgswpdlm/AADmYlJ4QRYWn
 Once BlueJ and everything has been installed, open project in BlueJ. Click "Tools", then select Preferences. Under preferences, click on "Libraries" tab and add the two jar files located in: /Nestria-DB/Libraries/...
 
 ## ![Smile](/application/Images/smile.png)Credits <a name = "credits"> </a>
-- Artwork and program created by [Jamie Coulombe](https://github.com/jcoolu) (me)
+- Artwork and program - [Jamie Coulombe](https://github.com/jcoolu) (me)
 - Nestria Title Theme Song - [Kirby Forsberg](https://github.com/OtherKirby)![music](/application/Images/music.png)![music](/application/Images/music.png)
 ----------------------------------------------------------------------------
