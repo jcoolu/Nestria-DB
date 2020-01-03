@@ -5,7 +5,7 @@ GUI program created in Java that allows the user to access the database Nestria.
 ## Table of Contents
 
 - ![Nestria Icon](/application/Images/NestriaIcon.png)[What is Nestria?](#what-is-nestria?)
-- [Features](#Features)
+- ![Camera Flash](/application/Images/lightbulb.png)[Features](#Features)
 - How to Install
 - Credits
 
