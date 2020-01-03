@@ -24,6 +24,7 @@ Some features of this program are you can enter the arena (attack other creature
 ### Enter the Arena
 ![Arena](/application/Images/arena2.PNG)
 Enter the Arena and you (the player) will battle with various creatures. You have three options:
+
 ![Attack](/application/Images/attack.PNG)![Defend](/application/Images/defend.PNG)![Run](/application/Images/run.PNG)
 
 * ATTACK - Attack the Creature, however your player is vulnerable and takes damage as well.
@@ -35,13 +36,66 @@ Enter the Arena and you (the player) will battle with various creatures. You hav
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 ### Add Players
+Add a Knight or a Viking.
 
+* Knight: 
+
+	ID: Integer
+
+	NAME: String
+
+	ATTACK: Integer
+
+	DEFENSE: Integer
+
+	WEAPON: Selection
+
+	SHIELD: Selection
+
+	KINGDOM: Selection
+
+* Viking:
+ 
+	ID: Integer
+
+	NAME: String
+
+	ATTACK: Integer
+
+	DEFENSE: Integer
+
+	WEAPON: Selection
+
+	SHIELD: Selection
+
+	TRIBE: Selection
 ----------------------------------------------------------------------------------------------------------------------------------------
 ### Heal Players
+Heal either a Creature or Player.
+
+* Creature:
+
+	ID: Integer
+	HEALTH: Integer
+
+* Player:
+
+	ID: Integer
+	HEALTH: Integer
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 ### View Information
+View the Information of any of the assets or characters used in this game. 
 
+* Players
+
+* Creatures
+
+* Weapons
+
+* Shields
+
+* Scenery
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 ## ![Book](/application/Images/book.png)How To Install <a name = "how-to-install"> </a>
