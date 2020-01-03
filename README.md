@@ -101,5 +101,28 @@ View the Information of any of the assets or characters used in this game.
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 ## ![Book](/application/Images/book.png)How To Install <a name = "how-to-install"> </a>
+### What you'll need:
+- BlueJ
+- Java 8 SE (At least)
+- JavaFX
+- SQLite
+----------------------------------------------------------------------------------------------------------------------------------------
+
+### BlueJ
+Download BlueJ here: [BlueJ](https://bluej.org/)
+
+### Java
+For java, download at least Java 8.0
+Java 8.0 comes with JavaFX installed in JDK and JRE
+Download Link: [Java](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
+
+### JavaFX
+Download Link: [JavaFX](https://www.oracle.com/java/technologies/javafx2-archive-downloads.html)
+
+### SQLite
+Download SQLite version 3.8.11.2
+Download Link: [SQLite](https://www.dropbox.com/sh/iyilxtepgswpdlm/AADmYlJ4QRYWn_eo9u4fPn0Aa?dl=0) (File is in folder sqlite3)
+
+Once BlueJ and everything has been installed, open project in BlueJ. Click "Tools", then select Preferences. Under preferences, click on "Libraries" tab and add the two jar files located in: /Nestria-DB/Libraries/...
 
 ## ![Smile](/application/Images/smile.png)Credits <a name = "credits"> </a>
