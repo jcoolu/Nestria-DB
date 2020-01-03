@@ -25,7 +25,7 @@ Some features of this program are you can enter the arena (attack other creature
 ![Arena](/application/Images/arena2.PNG)
 Enter the Arena and you (the player) will battle with various creatures. You have three options:
 
-![Attack](/application/Images/attack.PNG)![Defend](/application/Images/defend.PNG)![Run](/application/Images/run.PNG)
+![Attack](/application/Images/attack.PNG)![Defend](/application/Images/defend.PNG)![Run](/application/Images/runaway.PNG)
 
 * ATTACK - Attack the Creature, however your player is vulnerable and takes damage as well.
 
